@@ -1,0 +1,498 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mujoco model="pi_12dof_multi_scene">
+  <compiler angle="radian" />
+  <default>
+    <joint armature="0.01" />
+    </default>
+  <asset>
+    <mesh name="baselink_1" file="meshes/baselink_1.STL" />
+    <mesh name="l_hip_pitch_link" file="meshes/l_hip_pitch_link.STL" />
+    <mesh name="l_hip_roll_link" file="meshes/l_hip_roll_link.STL" />
+    <mesh name="l_thigh_link" file="meshes/l_thigh_link.STL" />
+    <mesh name="l_calf_link" file="meshes/l_calf_link.STL" />
+    <mesh name="l_ankle_pitch_link" file="meshes/l_ankle_pitch_link.STL" />
+    <mesh name="l_ankle_roll_link" file="meshes/l_ankle_roll_link.STL" />
+    <mesh name="foot" file="meshes/foot.STL" scale="0.001 0.001 0.001" />
+    <mesh name="r_hip_pitch_link" file="meshes/r_hip_pitch_link.STL" />
+    <mesh name="r_hip_roll_link" file="meshes/r_hip_roll_link.STL" />
+    <mesh name="r_thigh_link" file="meshes/r_thigh_link.STL" />
+    <mesh name="r_calf_link" file="meshes/r_calf_link.STL" />
+    <mesh name="r_ankle_pitch_link" file="meshes/r_ankle_pitch_link.STL" />
+    <mesh name="r_ankle_roll_link" file="meshes/r_ankle_roll_link.STL" />
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="512" />
+    <texture name="texplane" type="2d" builtin="checker" rgb1=".2 .3 .4" rgb2=".1 0.15 0.2" width="512" height="512" mark="cross" markrgb=".8 .8 .8" />
+    <material name="matplane" reflectance="0.0" texture="texplane" texrepeat="1 1" texuniform="true" />
+    </asset>
+  <option timestep="0.002" gravity="0 0 -9.81" />
+  <visual>
+    <quality shadowsize="4096" />
+    <map znear="0.05" />
+    </visual>
+  <worldbody>
+    <light directional="true" diffuse=".4 .4 .4" specular="0.1 0.1 0.1" pos="0 0 5.0" dir="0 0 -1" castshadow="false" />
+    <light directional="true" diffuse=".6 .6 .6" specular="0.2 0.2 0.2" pos="0 0 4" dir="0 0 -1" />
+    <geom name="ground" type="plane" size="0 0 1" pos="0.001 0 0" quat="1 0 0 0" material="matplane" condim="1" conaffinity="15" />
+    <body name="r0_base_link" pos="0.0000 0 0.35">
+      <freejoint name="r0_floating_base_joint" />
+      <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="1 1 1 1" mesh="baselink_1" />
+      <geom size="0.085 0.075 0.075" pos="0 0 0.08" type="box" rgba="1 1 1 1" />
+      <body name="r0_l_hip_pitch_link" pos="-5.1979e-05 0.0233 -0.033">
+        <inertial pos="0.00136864 0.0306252 0.0002713" quat="0.557997 0.438077 -0.567439 0.418021" mass="0.398576" diaginertia="0.000124246 0.000104469 9.64753e-05" />
+        <joint name="r0_07_l_hip_pitch_joint" pos="0 0 0" axis="0 1 0" range="-1.5 1.5" actuatorfrcrange="-20 20" damping="0.1" />
+        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_hip_pitch_link" />
+        <geom size="0.025 0.025 0.025" pos="0 0.06 0" type="box" rgba="0.75294 0.75294 0.75294 1" />
+        <body name="r0_l_hip_roll_link" pos="0 0.0568 0">
+          <inertial pos="0.00098441 0.00013641 -0.0612495" quat="0.704579 0.0290139 0.027293 0.708507" mass="0.485718" diaginertia="0.000574155 0.000484944 0.000220212" />
+          <joint name="r0_08_l_hip_roll_joint" pos="0 0 0" axis="1 0 0" range="-0.38 1.2" actuatorfrcrange="-20 20" damping="0.1" />
+          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_hip_roll_link" />
+          <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" />
+          <body name="r0_l_thigh_link" pos="0 0 -0.06925">
+            <inertial pos="0 -0.00095496 -0.0236847" quat="0.660453 0.750867 0 0" mass="0.10938" diaginertia="0.00011979 9.06194e-05 5.68806e-05" />
+            <joint name="r0_09_l_thigh_joint" pos="0 0 0" axis="0 0 1" range="-1 1" actuatorfrcrange="-20 20" damping="0.1" />
+            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_thigh_link" />
+            <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" />
+            <body name="r0_l_calf_link" pos="0 0 -0.07025">
+              <inertial pos="-1.362e-05 0.00276237 -0.0700557" quat="0.999997 -0.000158839 0.00210677 -0.00144397" mass="0.80287" diaginertia="0.00372691 0.00371467 0.000183917" />
+              <joint name="r0_10_l_calf_joint" pos="0 0 0" axis="0 1 0" range="0 2.2" actuatorfrcrange="-20 20" damping="0.1" />
+              <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_calf_link" />
+              <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" />
+              <body name="r0_l_ankle_pitch_link" pos="0 0 -0.14">
+                <inertial pos="0.00655369 -0.00218609 1.446e-05" quat="-0.0129826 0.706801 0.0129996 0.707174" mass="0.165583" diaginertia="0.00027198 0.000184707 0.000120153" />
+                <joint name="r0_11_l_ankle_pitch_joint" pos="0 0 0" axis="0 1 0" range="-0.8 0.8" actuatorfrcrange="-20 20" damping="0.1" />
+                <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_ankle_pitch_link" />
+                <geom size="0.035 0.0325 0.0225" type="box" rgba="0.75294 0.75294 0.75294 1" />
+                <body name="r0_l_ankle_roll_link" pos="0.07525 0 0">
+                  <inertial pos="0.00265784 0.00017568 -0.0126664" quat="0.559425 0.431421 0.433461 0.559492" mass="0.622349" diaginertia="0.00146851 0.00135082 0.000403903" />
+                  <joint name="r0_12_l_ankle_roll_joint" pos="0 0 0" axis="1 0 0" range="-0.6 0.6" actuatorfrcrange="-20 20" damping="0.1" />
+                  <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_ankle_roll_link" />
+                  <geom pos="0.036 -0.036 -0.0479" quat="0.707105 0 0 0.707108" type="mesh" rgba="0.75294 0.75294 0.75294 1" mesh="foot" />
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      <body name="r0_r_hip_pitch_link" pos="-5.1979e-05 -0.0233 -0.033">
+        <inertial pos="0.00136979 -0.0311672 0.0002713" quat="0.443024 0.552233 -0.448007 0.545947" mass="0.398576" diaginertia="0.000125564 0.000105619 9.66873e-05" />
+        <joint name="r0_01_r_hip_pitch_joint" pos="0 0 0" axis="0 1 0" range="-1.5 1.5" actuatorfrcrange="-20 20" damping="0.1" />
+        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_hip_pitch_link" />
+        <geom size="0.025 0.025 0.025" pos="0 -0.06 0" type="box" rgba="0.75294 0.75294 0.75294 1" />
+        <body name="r0_r_hip_roll_link" pos="0.00025 -0.0568 0">
+          <inertial pos="0.00098441 -0.0339458 -0.0612495" quat="0.704737 0.027725 0.0285958 0.70835" mass="0.485718" diaginertia="0.000574153 0.000484944 0.000220223" />
+          <joint name="r0_02_r_hip_roll_joint" pos="0 0 0" axis="1 0 0" range="-0.38 1.2" actuatorfrcrange="-20 20" damping="0.1" />
+          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_hip_roll_link" />
+          <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" />
+          <body name="r0_r_thigh_link" pos="-0.00025 0 -0.06925">
+            <inertial pos="0 0.00116854 -0.047559" quat="0.749712 0.661764 0 0" mass="0.10938" diaginertia="0.0001194 9.02029e-05 5.69171e-05" />
+            <joint name="r0_03_r_thigh_joint" pos="0 0 0" axis="0 0 1" range="-1 1" actuatorfrcrange="-20 20" damping="0.1" />
+            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_thigh_link" />
+            <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" />
+            <body name="r0_r_calf_link" pos="0 -0.0027 -0.07025">
+              <inertial pos="-1.362e-05 -0.00276237 -0.0700557" quat="0.999996 0.000151905 -0.00210869 0.00182335" mass="0.80287" diaginertia="0.00372691 0.00371467 0.000183917" />
+              <joint name="r0_04_r_calf_joint" pos="0 0 0" axis="0 1 0" range="0 2.2" actuatorfrcrange="-20 20" damping="0.1" />
+              <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_calf_link" />
+              <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" />
+              <body name="r0_r_ankle_pitch_link" pos="0 0 -0.14">
+                <inertial pos="0.00655369 0.00218609 -1.446e-05" quat="0.0129996 0.707174 -0.0129826 0.706801" mass="0.165583" diaginertia="0.00027198 0.000184707 0.000120153" />
+                <joint name="r0_05_r_ankle_pitch_joint" pos="0 0 0" axis="0 1 0" range="-0.8 0.8" actuatorfrcrange="-20 20" damping="0.1" />
+                <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_ankle_pitch_link" />
+                <geom size="0.035 0.0325 0.0225" type="box" rgba="0.75294 0.75294 0.75294 1" />
+                <body name="r0_r_ankle_roll_link" pos="0.07525 0.0027 0">
+                  <inertial pos="0.00265784 0.00017568 -0.0126664" quat="0.559425 0.431421 0.433461 0.559492" mass="0.622349" diaginertia="0.00146851 0.00135082 0.000403903" />
+                  <joint name="r0_06_r_ankle_roll_joint" pos="0 0 0" axis="1 0 0" range="-0.6 0.6" actuatorfrcrange="-20 20" damping="0.1" />
+                  <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_ankle_roll_link" />
+                  <geom pos="0.036 -0.036 -0.0479" quat="0.707105 0 0 0.707108" type="mesh" rgba="0.75294 0.75294 0.75294 1" mesh="foot" />
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    <body name="r1_base_link" pos="1.4000 0 0.35">
+      <freejoint name="r1_floating_base_joint" />
+      <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="1 1 1 1" mesh="baselink_1" friction="0.85" />
+      <geom size="0.085 0.075 0.075" pos="0 0 0.08" type="box" rgba="1 1 1 1" friction="0.85" />
+      <body name="r1_l_hip_pitch_link" pos="-5.1979e-05 0.0233 -0.033">
+        <inertial pos="0.00136864 0.0306252 0.0002713" quat="0.557997 0.438077 -0.567439 0.418021" mass="0.338790" diaginertia="0.000124246 0.000104469 9.64753e-05" />
+        <joint name="r1_07_l_hip_pitch_joint" pos="0 0 0" axis="0 1 0" range="-1.5 1.5" actuatorfrcrange="-20 20" damping="0.1" />
+        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_hip_pitch_link" friction="0.85" />
+        <geom size="0.025 0.025 0.025" pos="0 0.06 0" type="box" rgba="0.75294 0.75294 0.75294 1" friction="0.85" />
+        <body name="r1_l_hip_roll_link" pos="0 0.0568 0">
+          <inertial pos="0.00098441 0.00013641 -0.0612495" quat="0.704579 0.0290139 0.027293 0.708507" mass="0.412860" diaginertia="0.000574155 0.000484944 0.000220212" />
+          <joint name="r1_08_l_hip_roll_joint" pos="0 0 0" axis="1 0 0" range="-0.38 1.2" actuatorfrcrange="-20 20" damping="0.1" />
+          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_hip_roll_link" friction="0.85" />
+          <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="0.85" />
+          <body name="r1_l_thigh_link" pos="0 0 -0.06925">
+            <inertial pos="0 -0.00095496 -0.0236847" quat="0.660453 0.750867 0 0" mass="0.092973" diaginertia="0.00011979 9.06194e-05 5.68806e-05" />
+            <joint name="r1_09_l_thigh_joint" pos="0 0 0" axis="0 0 1" range="-1 1" actuatorfrcrange="-20 20" damping="0.1" />
+            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_thigh_link" friction="0.85" />
+            <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="0.85" />
+            <body name="r1_l_calf_link" pos="0 0 -0.07025">
+              <inertial pos="-1.362e-05 0.00276237 -0.0700557" quat="0.999997 -0.000158839 0.00210677 -0.00144397" mass="0.682439" diaginertia="0.00372691 0.00371467 0.000183917" />
+              <joint name="r1_10_l_calf_joint" pos="0 0 0" axis="0 1 0" range="0 2.2" actuatorfrcrange="-20 20" damping="0.1" />
+              <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_calf_link" friction="0.85" />
+              <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="0.85" />
+              <body name="r1_l_ankle_pitch_link" pos="0 0 -0.14">
+                <inertial pos="0.00655369 -0.00218609 1.446e-05" quat="-0.0129826 0.706801 0.0129996 0.707174" mass="0.140746" diaginertia="0.00027198 0.000184707 0.000120153" />
+                <joint name="r1_11_l_ankle_pitch_joint" pos="0 0 0" axis="0 1 0" range="-0.8 0.8" actuatorfrcrange="-20 20" damping="0.1" />
+                <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_ankle_pitch_link" friction="0.85" />
+                <geom size="0.035 0.0325 0.0225" type="box" rgba="0.75294 0.75294 0.75294 1" friction="0.85" />
+                <body name="r1_l_ankle_roll_link" pos="0.07525 0 0">
+                  <inertial pos="0.00265784 0.00017568 -0.0126664" quat="0.559425 0.431421 0.433461 0.559492" mass="0.528997" diaginertia="0.00146851 0.00135082 0.000403903" />
+                  <joint name="r1_12_l_ankle_roll_joint" pos="0 0 0" axis="1 0 0" range="-0.6 0.6" actuatorfrcrange="-20 20" damping="0.1" />
+                  <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_ankle_roll_link" friction="0.85" />
+                  <geom pos="0.036 -0.036 -0.0479" quat="0.707105 0 0 0.707108" type="mesh" rgba="0.75294 0.75294 0.75294 1" mesh="foot" friction="0.85" />
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      <body name="r1_r_hip_pitch_link" pos="-5.1979e-05 -0.0233 -0.033">
+        <inertial pos="0.00136979 -0.0311672 0.0002713" quat="0.443024 0.552233 -0.448007 0.545947" mass="0.338790" diaginertia="0.000125564 0.000105619 9.66873e-05" />
+        <joint name="r1_01_r_hip_pitch_joint" pos="0 0 0" axis="0 1 0" range="-1.5 1.5" actuatorfrcrange="-20 20" damping="0.1" />
+        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_hip_pitch_link" friction="0.85" />
+        <geom size="0.025 0.025 0.025" pos="0 -0.06 0" type="box" rgba="0.75294 0.75294 0.75294 1" friction="0.85" />
+        <body name="r1_r_hip_roll_link" pos="0.00025 -0.0568 0">
+          <inertial pos="0.00098441 -0.0339458 -0.0612495" quat="0.704737 0.027725 0.0285958 0.70835" mass="0.412860" diaginertia="0.000574153 0.000484944 0.000220223" />
+          <joint name="r1_02_r_hip_roll_joint" pos="0 0 0" axis="1 0 0" range="-0.38 1.2" actuatorfrcrange="-20 20" damping="0.1" />
+          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_hip_roll_link" friction="0.85" />
+          <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="0.85" />
+          <body name="r1_r_thigh_link" pos="-0.00025 0 -0.06925">
+            <inertial pos="0 0.00116854 -0.047559" quat="0.749712 0.661764 0 0" mass="0.092973" diaginertia="0.0001194 9.02029e-05 5.69171e-05" />
+            <joint name="r1_03_r_thigh_joint" pos="0 0 0" axis="0 0 1" range="-1 1" actuatorfrcrange="-20 20" damping="0.1" />
+            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_thigh_link" friction="0.85" />
+            <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="0.85" />
+            <body name="r1_r_calf_link" pos="0 -0.0027 -0.07025">
+              <inertial pos="-1.362e-05 -0.00276237 -0.0700557" quat="0.999996 0.000151905 -0.00210869 0.00182335" mass="0.682439" diaginertia="0.00372691 0.00371467 0.000183917" />
+              <joint name="r1_04_r_calf_joint" pos="0 0 0" axis="0 1 0" range="0 2.2" actuatorfrcrange="-20 20" damping="0.1" />
+              <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_calf_link" friction="0.85" />
+              <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="0.85" />
+              <body name="r1_r_ankle_pitch_link" pos="0 0 -0.14">
+                <inertial pos="0.00655369 0.00218609 -1.446e-05" quat="0.0129996 0.707174 -0.0129826 0.706801" mass="0.140746" diaginertia="0.00027198 0.000184707 0.000120153" />
+                <joint name="r1_05_r_ankle_pitch_joint" pos="0 0 0" axis="0 1 0" range="-0.8 0.8" actuatorfrcrange="-20 20" damping="0.1" />
+                <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_ankle_pitch_link" friction="0.85" />
+                <geom size="0.035 0.0325 0.0225" type="box" rgba="0.75294 0.75294 0.75294 1" friction="0.85" />
+                <body name="r1_r_ankle_roll_link" pos="0.07525 0.0027 0">
+                  <inertial pos="0.00265784 0.00017568 -0.0126664" quat="0.559425 0.431421 0.433461 0.559492" mass="0.528997" diaginertia="0.00146851 0.00135082 0.000403903" />
+                  <joint name="r1_06_r_ankle_roll_joint" pos="0 0 0" axis="1 0 0" range="-0.6 0.6" actuatorfrcrange="-20 20" damping="0.1" />
+                  <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_ankle_roll_link" friction="0.85" />
+                  <geom pos="0.036 -0.036 -0.0479" quat="0.707105 0 0 0.707108" type="mesh" rgba="0.75294 0.75294 0.75294 1" mesh="foot" friction="0.85" />
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    <body name="r2_base_link" pos="2.8000 0 0.35">
+      <freejoint name="r2_floating_base_joint" />
+      <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="1 1 1 1" mesh="baselink_1" friction="0.90" />
+      <geom size="0.085 0.075 0.075" pos="0 0 0.08" type="box" rgba="1 1 1 1" friction="0.90" />
+      <body name="r2_l_hip_pitch_link" pos="-5.1979e-05 0.0233 -0.033">
+        <inertial pos="0.00136864 0.0306252 0.0002713" quat="0.557997 0.438077 -0.567439 0.418021" mass="0.358718" diaginertia="0.000124246 0.000104469 9.64753e-05" />
+        <joint name="r2_07_l_hip_pitch_joint" pos="0 0 0" axis="0 1 0" range="-1.5 1.5" actuatorfrcrange="-20 20" damping="0.1" />
+        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_hip_pitch_link" friction="0.90" />
+        <geom size="0.025 0.025 0.025" pos="0 0.06 0" type="box" rgba="0.75294 0.75294 0.75294 1" friction="0.90" />
+        <body name="r2_l_hip_roll_link" pos="0 0.0568 0">
+          <inertial pos="0.00098441 0.00013641 -0.0612495" quat="0.704579 0.0290139 0.027293 0.708507" mass="0.437146" diaginertia="0.000574155 0.000484944 0.000220212" />
+          <joint name="r2_08_l_hip_roll_joint" pos="0 0 0" axis="1 0 0" range="-0.38 1.2" actuatorfrcrange="-20 20" damping="0.1" />
+          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_hip_roll_link" friction="0.90" />
+          <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="0.90" />
+          <body name="r2_l_thigh_link" pos="0 0 -0.06925">
+            <inertial pos="0 -0.00095496 -0.0236847" quat="0.660453 0.750867 0 0" mass="0.098442" diaginertia="0.00011979 9.06194e-05 5.68806e-05" />
+            <joint name="r2_09_l_thigh_joint" pos="0 0 0" axis="0 0 1" range="-1 1" actuatorfrcrange="-20 20" damping="0.1" />
+            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_thigh_link" friction="0.90" />
+            <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="0.90" />
+            <body name="r2_l_calf_link" pos="0 0 -0.07025">
+              <inertial pos="-1.362e-05 0.00276237 -0.0700557" quat="0.999997 -0.000158839 0.00210677 -0.00144397" mass="0.722583" diaginertia="0.00372691 0.00371467 0.000183917" />
+              <joint name="r2_10_l_calf_joint" pos="0 0 0" axis="0 1 0" range="0 2.2" actuatorfrcrange="-20 20" damping="0.1" />
+              <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_calf_link" friction="0.90" />
+              <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="0.90" />
+              <body name="r2_l_ankle_pitch_link" pos="0 0 -0.14">
+                <inertial pos="0.00655369 -0.00218609 1.446e-05" quat="-0.0129826 0.706801 0.0129996 0.707174" mass="0.149025" diaginertia="0.00027198 0.000184707 0.000120153" />
+                <joint name="r2_11_l_ankle_pitch_joint" pos="0 0 0" axis="0 1 0" range="-0.8 0.8" actuatorfrcrange="-20 20" damping="0.1" />
+                <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_ankle_pitch_link" friction="0.90" />
+                <geom size="0.035 0.0325 0.0225" type="box" rgba="0.75294 0.75294 0.75294 1" friction="0.90" />
+                <body name="r2_l_ankle_roll_link" pos="0.07525 0 0">
+                  <inertial pos="0.00265784 0.00017568 -0.0126664" quat="0.559425 0.431421 0.433461 0.559492" mass="0.560114" diaginertia="0.00146851 0.00135082 0.000403903" />
+                  <joint name="r2_12_l_ankle_roll_joint" pos="0 0 0" axis="1 0 0" range="-0.6 0.6" actuatorfrcrange="-20 20" damping="0.1" />
+                  <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_ankle_roll_link" friction="0.90" />
+                  <geom pos="0.036 -0.036 -0.0479" quat="0.707105 0 0 0.707108" type="mesh" rgba="0.75294 0.75294 0.75294 1" mesh="foot" friction="0.90" />
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      <body name="r2_r_hip_pitch_link" pos="-5.1979e-05 -0.0233 -0.033">
+        <inertial pos="0.00136979 -0.0311672 0.0002713" quat="0.443024 0.552233 -0.448007 0.545947" mass="0.358718" diaginertia="0.000125564 0.000105619 9.66873e-05" />
+        <joint name="r2_01_r_hip_pitch_joint" pos="0 0 0" axis="0 1 0" range="-1.5 1.5" actuatorfrcrange="-20 20" damping="0.1" />
+        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_hip_pitch_link" friction="0.90" />
+        <geom size="0.025 0.025 0.025" pos="0 -0.06 0" type="box" rgba="0.75294 0.75294 0.75294 1" friction="0.90" />
+        <body name="r2_r_hip_roll_link" pos="0.00025 -0.0568 0">
+          <inertial pos="0.00098441 -0.0339458 -0.0612495" quat="0.704737 0.027725 0.0285958 0.70835" mass="0.437146" diaginertia="0.000574153 0.000484944 0.000220223" />
+          <joint name="r2_02_r_hip_roll_joint" pos="0 0 0" axis="1 0 0" range="-0.38 1.2" actuatorfrcrange="-20 20" damping="0.1" />
+          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_hip_roll_link" friction="0.90" />
+          <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="0.90" />
+          <body name="r2_r_thigh_link" pos="-0.00025 0 -0.06925">
+            <inertial pos="0 0.00116854 -0.047559" quat="0.749712 0.661764 0 0" mass="0.098442" diaginertia="0.0001194 9.02029e-05 5.69171e-05" />
+            <joint name="r2_03_r_thigh_joint" pos="0 0 0" axis="0 0 1" range="-1 1" actuatorfrcrange="-20 20" damping="0.1" />
+            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_thigh_link" friction="0.90" />
+            <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="0.90" />
+            <body name="r2_r_calf_link" pos="0 -0.0027 -0.07025">
+              <inertial pos="-1.362e-05 -0.00276237 -0.0700557" quat="0.999996 0.000151905 -0.00210869 0.00182335" mass="0.722583" diaginertia="0.00372691 0.00371467 0.000183917" />
+              <joint name="r2_04_r_calf_joint" pos="0 0 0" axis="0 1 0" range="0 2.2" actuatorfrcrange="-20 20" damping="0.1" />
+              <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_calf_link" friction="0.90" />
+              <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="0.90" />
+              <body name="r2_r_ankle_pitch_link" pos="0 0 -0.14">
+                <inertial pos="0.00655369 0.00218609 -1.446e-05" quat="0.0129996 0.707174 -0.0129826 0.706801" mass="0.149025" diaginertia="0.00027198 0.000184707 0.000120153" />
+                <joint name="r2_05_r_ankle_pitch_joint" pos="0 0 0" axis="0 1 0" range="-0.8 0.8" actuatorfrcrange="-20 20" damping="0.1" />
+                <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_ankle_pitch_link" friction="0.90" />
+                <geom size="0.035 0.0325 0.0225" type="box" rgba="0.75294 0.75294 0.75294 1" friction="0.90" />
+                <body name="r2_r_ankle_roll_link" pos="0.07525 0.0027 0">
+                  <inertial pos="0.00265784 0.00017568 -0.0126664" quat="0.559425 0.431421 0.433461 0.559492" mass="0.560114" diaginertia="0.00146851 0.00135082 0.000403903" />
+                  <joint name="r2_06_r_ankle_roll_joint" pos="0 0 0" axis="1 0 0" range="-0.6 0.6" actuatorfrcrange="-20 20" damping="0.1" />
+                  <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_ankle_roll_link" friction="0.90" />
+                  <geom pos="0.036 -0.036 -0.0479" quat="0.707105 0 0 0.707108" type="mesh" rgba="0.75294 0.75294 0.75294 1" mesh="foot" friction="0.90" />
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    <body name="r3_base_link" pos="4.2000 0 0.35">
+      <freejoint name="r3_floating_base_joint" />
+      <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="1 1 1 1" mesh="baselink_1" friction="1.00" />
+      <geom size="0.085 0.075 0.075" pos="0 0 0.08" type="box" rgba="1 1 1 1" friction="1.00" />
+      <body name="r3_l_hip_pitch_link" pos="-5.1979e-05 0.0233 -0.033">
+        <inertial pos="0.00136864 0.0306252 0.0002713" quat="0.557997 0.438077 -0.567439 0.418021" mass="0.398576" diaginertia="0.000124246 0.000104469 9.64753e-05" />
+        <joint name="r3_07_l_hip_pitch_joint" pos="0 0 0" axis="0 1 0" range="-1.5 1.5" actuatorfrcrange="-20 20" damping="0.1" />
+        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_hip_pitch_link" friction="1.00" />
+        <geom size="0.025 0.025 0.025" pos="0 0.06 0" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.00" />
+        <body name="r3_l_hip_roll_link" pos="0 0.0568 0">
+          <inertial pos="0.00098441 0.00013641 -0.0612495" quat="0.704579 0.0290139 0.027293 0.708507" mass="0.485718" diaginertia="0.000574155 0.000484944 0.000220212" />
+          <joint name="r3_08_l_hip_roll_joint" pos="0 0 0" axis="1 0 0" range="-0.38 1.2" actuatorfrcrange="-20 20" damping="0.1" />
+          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_hip_roll_link" friction="1.00" />
+          <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.00" />
+          <body name="r3_l_thigh_link" pos="0 0 -0.06925">
+            <inertial pos="0 -0.00095496 -0.0236847" quat="0.660453 0.750867 0 0" mass="0.109380" diaginertia="0.00011979 9.06194e-05 5.68806e-05" />
+            <joint name="r3_09_l_thigh_joint" pos="0 0 0" axis="0 0 1" range="-1 1" actuatorfrcrange="-20 20" damping="0.1" />
+            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_thigh_link" friction="1.00" />
+            <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.00" />
+            <body name="r3_l_calf_link" pos="0 0 -0.07025">
+              <inertial pos="-1.362e-05 0.00276237 -0.0700557" quat="0.999997 -0.000158839 0.00210677 -0.00144397" mass="0.802870" diaginertia="0.00372691 0.00371467 0.000183917" />
+              <joint name="r3_10_l_calf_joint" pos="0 0 0" axis="0 1 0" range="0 2.2" actuatorfrcrange="-20 20" damping="0.1" />
+              <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_calf_link" friction="1.00" />
+              <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.00" />
+              <body name="r3_l_ankle_pitch_link" pos="0 0 -0.14">
+                <inertial pos="0.00655369 -0.00218609 1.446e-05" quat="-0.0129826 0.706801 0.0129996 0.707174" mass="0.165583" diaginertia="0.00027198 0.000184707 0.000120153" />
+                <joint name="r3_11_l_ankle_pitch_joint" pos="0 0 0" axis="0 1 0" range="-0.8 0.8" actuatorfrcrange="-20 20" damping="0.1" />
+                <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_ankle_pitch_link" friction="1.00" />
+                <geom size="0.035 0.0325 0.0225" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.00" />
+                <body name="r3_l_ankle_roll_link" pos="0.07525 0 0">
+                  <inertial pos="0.00265784 0.00017568 -0.0126664" quat="0.559425 0.431421 0.433461 0.559492" mass="0.622349" diaginertia="0.00146851 0.00135082 0.000403903" />
+                  <joint name="r3_12_l_ankle_roll_joint" pos="0 0 0" axis="1 0 0" range="-0.6 0.6" actuatorfrcrange="-20 20" damping="0.1" />
+                  <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_ankle_roll_link" friction="1.00" />
+                  <geom pos="0.036 -0.036 -0.0479" quat="0.707105 0 0 0.707108" type="mesh" rgba="0.75294 0.75294 0.75294 1" mesh="foot" friction="1.00" />
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      <body name="r3_r_hip_pitch_link" pos="-5.1979e-05 -0.0233 -0.033">
+        <inertial pos="0.00136979 -0.0311672 0.0002713" quat="0.443024 0.552233 -0.448007 0.545947" mass="0.398576" diaginertia="0.000125564 0.000105619 9.66873e-05" />
+        <joint name="r3_01_r_hip_pitch_joint" pos="0 0 0" axis="0 1 0" range="-1.5 1.5" actuatorfrcrange="-20 20" damping="0.1" />
+        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_hip_pitch_link" friction="1.00" />
+        <geom size="0.025 0.025 0.025" pos="0 -0.06 0" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.00" />
+        <body name="r3_r_hip_roll_link" pos="0.00025 -0.0568 0">
+          <inertial pos="0.00098441 -0.0339458 -0.0612495" quat="0.704737 0.027725 0.0285958 0.70835" mass="0.485718" diaginertia="0.000574153 0.000484944 0.000220223" />
+          <joint name="r3_02_r_hip_roll_joint" pos="0 0 0" axis="1 0 0" range="-0.38 1.2" actuatorfrcrange="-20 20" damping="0.1" />
+          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_hip_roll_link" friction="1.00" />
+          <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.00" />
+          <body name="r3_r_thigh_link" pos="-0.00025 0 -0.06925">
+            <inertial pos="0 0.00116854 -0.047559" quat="0.749712 0.661764 0 0" mass="0.109380" diaginertia="0.0001194 9.02029e-05 5.69171e-05" />
+            <joint name="r3_03_r_thigh_joint" pos="0 0 0" axis="0 0 1" range="-1 1" actuatorfrcrange="-20 20" damping="0.1" />
+            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_thigh_link" friction="1.00" />
+            <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.00" />
+            <body name="r3_r_calf_link" pos="0 -0.0027 -0.07025">
+              <inertial pos="-1.362e-05 -0.00276237 -0.0700557" quat="0.999996 0.000151905 -0.00210869 0.00182335" mass="0.802870" diaginertia="0.00372691 0.00371467 0.000183917" />
+              <joint name="r3_04_r_calf_joint" pos="0 0 0" axis="0 1 0" range="0 2.2" actuatorfrcrange="-20 20" damping="0.1" />
+              <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_calf_link" friction="1.00" />
+              <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.00" />
+              <body name="r3_r_ankle_pitch_link" pos="0 0 -0.14">
+                <inertial pos="0.00655369 0.00218609 -1.446e-05" quat="0.0129996 0.707174 -0.0129826 0.706801" mass="0.165583" diaginertia="0.00027198 0.000184707 0.000120153" />
+                <joint name="r3_05_r_ankle_pitch_joint" pos="0 0 0" axis="0 1 0" range="-0.8 0.8" actuatorfrcrange="-20 20" damping="0.1" />
+                <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_ankle_pitch_link" friction="1.00" />
+                <geom size="0.035 0.0325 0.0225" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.00" />
+                <body name="r3_r_ankle_roll_link" pos="0.07525 0.0027 0">
+                  <inertial pos="0.00265784 0.00017568 -0.0126664" quat="0.559425 0.431421 0.433461 0.559492" mass="0.622349" diaginertia="0.00146851 0.00135082 0.000403903" />
+                  <joint name="r3_06_r_ankle_roll_joint" pos="0 0 0" axis="1 0 0" range="-0.6 0.6" actuatorfrcrange="-20 20" damping="0.1" />
+                  <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_ankle_roll_link" friction="1.00" />
+                  <geom pos="0.036 -0.036 -0.0479" quat="0.707105 0 0 0.707108" type="mesh" rgba="0.75294 0.75294 0.75294 1" mesh="foot" friction="1.00" />
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    <body name="r4_base_link" pos="5.6000 0 0.35">
+      <freejoint name="r4_floating_base_joint" />
+      <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="1 1 1 1" mesh="baselink_1" friction="1.10" />
+      <geom size="0.085 0.075 0.075" pos="0 0 0.08" type="box" rgba="1 1 1 1" friction="1.10" />
+      <body name="r4_l_hip_pitch_link" pos="-5.1979e-05 0.0233 -0.033">
+        <inertial pos="0.00136864 0.0306252 0.0002713" quat="0.557997 0.438077 -0.567439 0.418021" mass="0.438434" diaginertia="0.000124246 0.000104469 9.64753e-05" />
+        <joint name="r4_07_l_hip_pitch_joint" pos="0 0 0" axis="0 1 0" range="-1.5 1.5" actuatorfrcrange="-20 20" damping="0.1" />
+        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_hip_pitch_link" friction="1.10" />
+        <geom size="0.025 0.025 0.025" pos="0 0.06 0" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.10" />
+        <body name="r4_l_hip_roll_link" pos="0 0.0568 0">
+          <inertial pos="0.00098441 0.00013641 -0.0612495" quat="0.704579 0.0290139 0.027293 0.708507" mass="0.534290" diaginertia="0.000574155 0.000484944 0.000220212" />
+          <joint name="r4_08_l_hip_roll_joint" pos="0 0 0" axis="1 0 0" range="-0.38 1.2" actuatorfrcrange="-20 20" damping="0.1" />
+          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_hip_roll_link" friction="1.10" />
+          <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.10" />
+          <body name="r4_l_thigh_link" pos="0 0 -0.06925">
+            <inertial pos="0 -0.00095496 -0.0236847" quat="0.660453 0.750867 0 0" mass="0.120318" diaginertia="0.00011979 9.06194e-05 5.68806e-05" />
+            <joint name="r4_09_l_thigh_joint" pos="0 0 0" axis="0 0 1" range="-1 1" actuatorfrcrange="-20 20" damping="0.1" />
+            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_thigh_link" friction="1.10" />
+            <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.10" />
+            <body name="r4_l_calf_link" pos="0 0 -0.07025">
+              <inertial pos="-1.362e-05 0.00276237 -0.0700557" quat="0.999997 -0.000158839 0.00210677 -0.00144397" mass="0.883157" diaginertia="0.00372691 0.00371467 0.000183917" />
+              <joint name="r4_10_l_calf_joint" pos="0 0 0" axis="0 1 0" range="0 2.2" actuatorfrcrange="-20 20" damping="0.1" />
+              <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_calf_link" friction="1.10" />
+              <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.10" />
+              <body name="r4_l_ankle_pitch_link" pos="0 0 -0.14">
+                <inertial pos="0.00655369 -0.00218609 1.446e-05" quat="-0.0129826 0.706801 0.0129996 0.707174" mass="0.182141" diaginertia="0.00027198 0.000184707 0.000120153" />
+                <joint name="r4_11_l_ankle_pitch_joint" pos="0 0 0" axis="0 1 0" range="-0.8 0.8" actuatorfrcrange="-20 20" damping="0.1" />
+                <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_ankle_pitch_link" friction="1.10" />
+                <geom size="0.035 0.0325 0.0225" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.10" />
+                <body name="r4_l_ankle_roll_link" pos="0.07525 0 0">
+                  <inertial pos="0.00265784 0.00017568 -0.0126664" quat="0.559425 0.431421 0.433461 0.559492" mass="0.684584" diaginertia="0.00146851 0.00135082 0.000403903" />
+                  <joint name="r4_12_l_ankle_roll_joint" pos="0 0 0" axis="1 0 0" range="-0.6 0.6" actuatorfrcrange="-20 20" damping="0.1" />
+                  <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_ankle_roll_link" friction="1.10" />
+                  <geom pos="0.036 -0.036 -0.0479" quat="0.707105 0 0 0.707108" type="mesh" rgba="0.75294 0.75294 0.75294 1" mesh="foot" friction="1.10" />
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      <body name="r4_r_hip_pitch_link" pos="-5.1979e-05 -0.0233 -0.033">
+        <inertial pos="0.00136979 -0.0311672 0.0002713" quat="0.443024 0.552233 -0.448007 0.545947" mass="0.438434" diaginertia="0.000125564 0.000105619 9.66873e-05" />
+        <joint name="r4_01_r_hip_pitch_joint" pos="0 0 0" axis="0 1 0" range="-1.5 1.5" actuatorfrcrange="-20 20" damping="0.1" />
+        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_hip_pitch_link" friction="1.10" />
+        <geom size="0.025 0.025 0.025" pos="0 -0.06 0" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.10" />
+        <body name="r4_r_hip_roll_link" pos="0.00025 -0.0568 0">
+          <inertial pos="0.00098441 -0.0339458 -0.0612495" quat="0.704737 0.027725 0.0285958 0.70835" mass="0.534290" diaginertia="0.000574153 0.000484944 0.000220223" />
+          <joint name="r4_02_r_hip_roll_joint" pos="0 0 0" axis="1 0 0" range="-0.38 1.2" actuatorfrcrange="-20 20" damping="0.1" />
+          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_hip_roll_link" friction="1.10" />
+          <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.10" />
+          <body name="r4_r_thigh_link" pos="-0.00025 0 -0.06925">
+            <inertial pos="0 0.00116854 -0.047559" quat="0.749712 0.661764 0 0" mass="0.120318" diaginertia="0.0001194 9.02029e-05 5.69171e-05" />
+            <joint name="r4_03_r_thigh_joint" pos="0 0 0" axis="0 0 1" range="-1 1" actuatorfrcrange="-20 20" damping="0.1" />
+            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_thigh_link" friction="1.10" />
+            <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.10" />
+            <body name="r4_r_calf_link" pos="0 -0.0027 -0.07025">
+              <inertial pos="-1.362e-05 -0.00276237 -0.0700557" quat="0.999996 0.000151905 -0.00210869 0.00182335" mass="0.883157" diaginertia="0.00372691 0.00371467 0.000183917" />
+              <joint name="r4_04_r_calf_joint" pos="0 0 0" axis="0 1 0" range="0 2.2" actuatorfrcrange="-20 20" damping="0.1" />
+              <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_calf_link" friction="1.10" />
+              <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.10" />
+              <body name="r4_r_ankle_pitch_link" pos="0 0 -0.14">
+                <inertial pos="0.00655369 0.00218609 -1.446e-05" quat="0.0129996 0.707174 -0.0129826 0.706801" mass="0.182141" diaginertia="0.00027198 0.000184707 0.000120153" />
+                <joint name="r4_05_r_ankle_pitch_joint" pos="0 0 0" axis="0 1 0" range="-0.8 0.8" actuatorfrcrange="-20 20" damping="0.1" />
+                <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_ankle_pitch_link" friction="1.10" />
+                <geom size="0.035 0.0325 0.0225" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.10" />
+                <body name="r4_r_ankle_roll_link" pos="0.07525 0.0027 0">
+                  <inertial pos="0.00265784 0.00017568 -0.0126664" quat="0.559425 0.431421 0.433461 0.559492" mass="0.684584" diaginertia="0.00146851 0.00135082 0.000403903" />
+                  <joint name="r4_06_r_ankle_roll_joint" pos="0 0 0" axis="1 0 0" range="-0.6 0.6" actuatorfrcrange="-20 20" damping="0.1" />
+                  <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_ankle_roll_link" friction="1.10" />
+                  <geom pos="0.036 -0.036 -0.0479" quat="0.707105 0 0 0.707108" type="mesh" rgba="0.75294 0.75294 0.75294 1" mesh="foot" friction="1.10" />
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    <body name="r5_base_link" pos="7.0000 0 0.35">
+      <freejoint name="r5_floating_base_joint" />
+      <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="1 1 1 1" mesh="baselink_1" friction="1.20" />
+      <geom size="0.085 0.075 0.075" pos="0 0 0.08" type="box" rgba="1 1 1 1" friction="1.20" />
+      <body name="r5_l_hip_pitch_link" pos="-5.1979e-05 0.0233 -0.033">
+        <inertial pos="0.00136864 0.0306252 0.0002713" quat="0.557997 0.438077 -0.567439 0.418021" mass="0.478291" diaginertia="0.000124246 0.000104469 9.64753e-05" />
+        <joint name="r5_07_l_hip_pitch_joint" pos="0 0 0" axis="0 1 0" range="-1.5 1.5" actuatorfrcrange="-20 20" damping="0.1" />
+        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_hip_pitch_link" friction="1.20" />
+        <geom size="0.025 0.025 0.025" pos="0 0.06 0" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.20" />
+        <body name="r5_l_hip_roll_link" pos="0 0.0568 0">
+          <inertial pos="0.00098441 0.00013641 -0.0612495" quat="0.704579 0.0290139 0.027293 0.708507" mass="0.582862" diaginertia="0.000574155 0.000484944 0.000220212" />
+          <joint name="r5_08_l_hip_roll_joint" pos="0 0 0" axis="1 0 0" range="-0.38 1.2" actuatorfrcrange="-20 20" damping="0.1" />
+          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_hip_roll_link" friction="1.20" />
+          <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.20" />
+          <body name="r5_l_thigh_link" pos="0 0 -0.06925">
+            <inertial pos="0 -0.00095496 -0.0236847" quat="0.660453 0.750867 0 0" mass="0.131256" diaginertia="0.00011979 9.06194e-05 5.68806e-05" />
+            <joint name="r5_09_l_thigh_joint" pos="0 0 0" axis="0 0 1" range="-1 1" actuatorfrcrange="-20 20" damping="0.1" />
+            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_thigh_link" friction="1.20" />
+            <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.20" />
+            <body name="r5_l_calf_link" pos="0 0 -0.07025">
+              <inertial pos="-1.362e-05 0.00276237 -0.0700557" quat="0.999997 -0.000158839 0.00210677 -0.00144397" mass="0.963444" diaginertia="0.00372691 0.00371467 0.000183917" />
+              <joint name="r5_10_l_calf_joint" pos="0 0 0" axis="0 1 0" range="0 2.2" actuatorfrcrange="-20 20" damping="0.1" />
+              <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_calf_link" friction="1.20" />
+              <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.20" />
+              <body name="r5_l_ankle_pitch_link" pos="0 0 -0.14">
+                <inertial pos="0.00655369 -0.00218609 1.446e-05" quat="-0.0129826 0.706801 0.0129996 0.707174" mass="0.198700" diaginertia="0.00027198 0.000184707 0.000120153" />
+                <joint name="r5_11_l_ankle_pitch_joint" pos="0 0 0" axis="0 1 0" range="-0.8 0.8" actuatorfrcrange="-20 20" damping="0.1" />
+                <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_ankle_pitch_link" friction="1.20" />
+                <geom size="0.035 0.0325 0.0225" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.20" />
+                <body name="r5_l_ankle_roll_link" pos="0.07525 0 0">
+                  <inertial pos="0.00265784 0.00017568 -0.0126664" quat="0.559425 0.431421 0.433461 0.559492" mass="0.746819" diaginertia="0.00146851 0.00135082 0.000403903" />
+                  <joint name="r5_12_l_ankle_roll_joint" pos="0 0 0" axis="1 0 0" range="-0.6 0.6" actuatorfrcrange="-20 20" damping="0.1" />
+                  <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="l_ankle_roll_link" friction="1.20" />
+                  <geom pos="0.036 -0.036 -0.0479" quat="0.707105 0 0 0.707108" type="mesh" rgba="0.75294 0.75294 0.75294 1" mesh="foot" friction="1.20" />
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      <body name="r5_r_hip_pitch_link" pos="-5.1979e-05 -0.0233 -0.033">
+        <inertial pos="0.00136979 -0.0311672 0.0002713" quat="0.443024 0.552233 -0.448007 0.545947" mass="0.478291" diaginertia="0.000125564 0.000105619 9.66873e-05" />
+        <joint name="r5_01_r_hip_pitch_joint" pos="0 0 0" axis="0 1 0" range="-1.5 1.5" actuatorfrcrange="-20 20" damping="0.1" />
+        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_hip_pitch_link" friction="1.20" />
+        <geom size="0.025 0.025 0.025" pos="0 -0.06 0" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.20" />
+        <body name="r5_r_hip_roll_link" pos="0.00025 -0.0568 0">
+          <inertial pos="0.00098441 -0.0339458 -0.0612495" quat="0.704737 0.027725 0.0285958 0.70835" mass="0.582862" diaginertia="0.000574153 0.000484944 0.000220223" />
+          <joint name="r5_02_r_hip_roll_joint" pos="0 0 0" axis="1 0 0" range="-0.38 1.2" actuatorfrcrange="-20 20" damping="0.1" />
+          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_hip_roll_link" friction="1.20" />
+          <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.20" />
+          <body name="r5_r_thigh_link" pos="-0.00025 0 -0.06925">
+            <inertial pos="0 0.00116854 -0.047559" quat="0.749712 0.661764 0 0" mass="0.131256" diaginertia="0.0001194 9.02029e-05 5.69171e-05" />
+            <joint name="r5_03_r_thigh_joint" pos="0 0 0" axis="0 0 1" range="-1 1" actuatorfrcrange="-20 20" damping="0.1" />
+            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_thigh_link" friction="1.20" />
+            <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.20" />
+            <body name="r5_r_calf_link" pos="0 -0.0027 -0.07025">
+              <inertial pos="-1.362e-05 -0.00276237 -0.0700557" quat="0.999996 0.000151905 -0.00210869 0.00182335" mass="0.963444" diaginertia="0.00372691 0.00371467 0.000183917" />
+              <joint name="r5_04_r_calf_joint" pos="0 0 0" axis="0 1 0" range="0 2.2" actuatorfrcrange="-20 20" damping="0.1" />
+              <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_calf_link" friction="1.20" />
+              <geom size="0.0005 0.0005 0.0005" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.20" />
+              <body name="r5_r_ankle_pitch_link" pos="0 0 -0.14">
+                <inertial pos="0.00655369 0.00218609 -1.446e-05" quat="0.0129996 0.707174 -0.0129826 0.706801" mass="0.198700" diaginertia="0.00027198 0.000184707 0.000120153" />
+                <joint name="r5_05_r_ankle_pitch_joint" pos="0 0 0" axis="0 1 0" range="-0.8 0.8" actuatorfrcrange="-20 20" damping="0.1" />
+                <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_ankle_pitch_link" friction="1.20" />
+                <geom size="0.035 0.0325 0.0225" type="box" rgba="0.75294 0.75294 0.75294 1" friction="1.20" />
+                <body name="r5_r_ankle_roll_link" pos="0.07525 0.0027 0">
+                  <inertial pos="0.00265784 0.00017568 -0.0126664" quat="0.559425 0.431421 0.433461 0.559492" mass="0.746819" diaginertia="0.00146851 0.00135082 0.000403903" />
+                  <joint name="r5_06_r_ankle_roll_joint" pos="0 0 0" axis="1 0 0" range="-0.6 0.6" actuatorfrcrange="-20 20" damping="0.1" />
+                  <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75294 0.75294 0.75294 1" mesh="r_ankle_roll_link" friction="1.20" />
+                  <geom pos="0.036 -0.036 -0.0479" quat="0.707105 0 0 0.707108" type="mesh" rgba="0.75294 0.75294 0.75294 1" mesh="foot" friction="1.20" />
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </worldbody>
+  </mujoco>
