@@ -136,36 +136,8 @@ Please stop the instance if you are not using it. Our manager bot stops the inst
 * Stopping the instance will terminate any process that is currently running, but it doesn't delete the files. However, we highly encourage you to keep constant backup of your files and push to the repo regularly to prevent any catastrophic loss.
 
 
-## c. Setting ssh key for Github on the server
-**[Do only once]**
 
-To be able to access your github repo effectively, we recommend using a `ssh-key`.
-
-From your **instance**, run:
-```
-ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
-```
-When prompted to "Enter a file in which to save the key," press Enter to accept the default file location (`~/.ssh/id_rsa`).
-You can skip the password for more simplicity.
-Then print the public key:
-```bash
-cat ~/.ssh/id_rsa.pub
-```
-Copy the output, then go to your github repository of this assignment, go to `settings -> security -> deploy keys -> add deploy key` and paste the value.
-
-You can add github as a host:
-```bash
-vim ~/.ssh/config
-```
-add the following to the file:
-```bash
-Host github.com
-  HostName github.com
-  User git
-  IdentityFile ~/.ssh/id_rsa
-```
-
-## d. Setting up environment on the remote server
+## c. Setting up environment on the remote server
 **[Do only once]**
 
 After you have successfully connected to the server, you can do the following to prepare for running the scripts.
@@ -173,7 +145,7 @@ We provide you with a docker image that has all the necessary dependencies insta
 
 1. Clone your repository, and head to your desired branch.
 ```
-git clone git@github.com:CMM-25/a3.git # use your own repository
+git clone https://github.com/CMM-26/a3.git # use your own repository
 ```
 2. Pull the docker container
 ```bash
@@ -197,7 +169,7 @@ cd /root/a3
 bash install.sh
 ```
 
-## e. Run your code on the server
+## d. Run your code on the server
 If you are already inside the container, jump to step 2.
 
 1. Start the docker container again
@@ -219,7 +191,7 @@ You can optionally create a new tmux window to see the gpu usage by running `nvi
 
 **Note:** The folder `a3` is always synced inside and out of the docker. So if you change the branch outside, your files inside the docker also change.
 
-## f. Weights & Biases
+## e. Weights & Biases
 You can monitor the training process using the Weights & Biases dashboard. 
 You first need to create an account on [Weights & Biases](https://wandb.ai).
 
