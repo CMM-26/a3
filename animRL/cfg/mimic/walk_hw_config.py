@@ -60,6 +60,10 @@ class WalkHWCfg(MimicCfg):
         push_interval_s = 4
         max_push_vel_xyz = 0.1
         max_push_avel_xyz = 0.0
+        add_action_delay = False
+        dynamic_randomization = 0.0
+        obs_noise_scale = 0.0
+
         # ----------- End of implementation
 
 

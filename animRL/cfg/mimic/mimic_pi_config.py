@@ -21,7 +21,7 @@ class MimicCfg(BaseEnvCfg):
         motion_files = ''
 
     class init_state(BaseEnvCfg.init_state):
-        pos = [0.0, 0.0, 0.36]  # x,y,z [m]
+        pos = [0.0, 0.0, 0.345]  # x,y,z [m]
         rot = [0.0, 0.0, 0.0, 1.0]  # x,y,z,w [quat]
         lin_vel = [0.0, 0.0, 0.0]  # x,y,z [m/s]
         ang_vel = [0.0, 0.0, 0.0]  # x,y,z [rad/s]

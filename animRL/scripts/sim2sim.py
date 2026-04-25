@@ -277,6 +277,10 @@ def run(args: argparse.Namespace) -> None:
         start = time.time()
         for step in range(sim_steps):
             if step % control_decimation == 0:
+                if np.any(done):
+                    for r in np.where(done)[0]:
+                        reset_robot(int(r))
+                    mujoco.mj_forward(model, data)
                 obs_batch = compute_obs_batch()
                 current_action[:] = policy_infer_batch(obs_batch)
                 last_action[:] = current_action.astype(np.float32)
@@ -288,10 +292,6 @@ def run(args: argparse.Namespace) -> None:
                 target_q[:] = default_q_base[None, :] + target_offset
                 phase += phase_rate
                 done = phase >= (1.0 - phase_rate)
-                if np.any(done):
-                    for r in np.where(done)[0]:
-                        reset_robot(int(r))
-                    mujoco.mj_forward(model, data)
             apply_pd_batch()
             mujoco.mj_step(model, data)
         print(f"[INFO] Headless multi rollout finished in {time.time() - start:.2f}s")

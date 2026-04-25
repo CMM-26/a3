@@ -159,6 +159,10 @@ class MimicHWTask(BaseTask):
             self.device)
 
     def step(self, actions):
+        if self.cfg.domain_rand.add_action_delay:
+            delay = torch.rand((self.num_envs, 1), device=self.device)
+            actions = (1 - delay) * actions + delay * self.actions
+        actions += (float(self.cfg.domain_rand.dynamic_randomization) * torch.randn_like(actions) * actions)
         self.pre_physics_step(actions)
         # step physics and render each frame
         self.render()
@@ -237,6 +241,8 @@ class MimicHWTask(BaseTask):
         # ----------- TODO 2.1: update observation
 
         # ----------- End of implementation
+
+        current_obs += torch.randn_like(current_obs) * self.cfg.domain_rand.obs_noise_scale
 
         self.obs_history_buf = torch.roll(self.obs_history_buf, shifts=-1, dims=1)
         self.obs_history_buf[:, -1, :] = current_obs
