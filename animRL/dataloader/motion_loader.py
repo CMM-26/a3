@@ -1,4 +1,5 @@
 import json
+import re
 import torch
 import numpy as np
 
@@ -24,6 +25,8 @@ class MotionLoader:
         self.cfg = cfg
         self.device = device
         self.sim_frame_dt = sim_frame_dt
+        self.motion_joint_names = None
+        self.joint_reindex = None
 
         self._init_indices()
         self._init_trajectory_data()
@@ -55,6 +58,16 @@ class MotionLoader:
         motion_data = np.array(motion_json["Frames"])
         if motion_json.get("OutputMode", "Pybullet") != "ISAAC":
             raise Exception('loading motions with different orders is deprecated.')
+        motion_joint_names = motion_json.get("JointNames")
+        if motion_joint_names is not None:
+            if len(motion_joint_names) != self.num_joints:
+                raise ValueError(
+                    f"Expected {self.num_joints} motion joints, but {motion_file} has {len(motion_joint_names)}"
+                )
+            if self.motion_joint_names is None:
+                self.motion_joint_names = motion_joint_names
+            elif self.motion_joint_names != motion_joint_names:
+                raise ValueError(f"Motion joint order mismatch in {motion_file}")
 
         # full frame trajectory
         full_frames = self.get_full_frames_from_motion_data(motion_data, motion_json)
@@ -183,7 +196,10 @@ class MotionLoader:
         return pose[..., self.ROOT_ROT_START_IDX:self.ROOT_ROT_END_IDX]
 
     def get_joint_pose(self, pose):
-        return pose[..., self.JOINT_POSE_START_IDX:self.JOINT_POSE_END_IDX]
+        joint_pose = pose[..., self.JOINT_POSE_START_IDX:self.JOINT_POSE_END_IDX]
+        if self.joint_reindex is not None:
+            joint_pose = joint_pose.index_select(-1, self.joint_reindex)
+        return joint_pose
 
     def get_ee_pos_local(self, pose):
         return pose[..., self.EE_POS_LOCAL_START_IDX:self.EE_POS_LOCAL_END_IDX]
@@ -195,7 +211,10 @@ class MotionLoader:
         return pose[..., self.ANGULAR_VEL_START_IDX:self.ANGULAR_VEL_END_IDX]
 
     def get_joint_vel(self, pose):
-        return pose[..., self.JOINT_VEL_START_IDX:self.JOINT_VEL_END_IDX]
+        joint_vel = pose[..., self.JOINT_VEL_START_IDX:self.JOINT_VEL_END_IDX]
+        if self.joint_reindex is not None:
+            joint_vel = joint_vel.index_select(-1, self.joint_reindex)
+        return joint_vel
 
     def get_ee_vel_local(self, pose):
         return pose[..., self.EE_VEL_LOCAL_START_IDX:self.EE_VEL_LOCAL_END_IDX]
@@ -208,6 +227,29 @@ class MotionLoader:
                                    ee_pos_local.reshape(-1, 3)) + root_pos.unsqueeze(1).repeat(1, self.num_ee,
                                                                                                1).reshape(-1, 3)
         return ee_pos.reshape(-1, self.num_ee, 3)
+
+    @staticmethod
+    def _canonical_joint_name(name):
+        return re.sub(r"^\d+_", "", name)
+
+    def set_sim_joint_order(self, sim_joint_names):
+        """Reorder motion joint slices to match simulator DOF order."""
+        if self.motion_joint_names is None:
+            return
+
+        motion_name_to_idx = {
+            self._canonical_joint_name(name): idx
+            for idx, name in enumerate(self.motion_joint_names)
+        }
+        reindex = []
+        for name in sim_joint_names:
+            canonical_name = self._canonical_joint_name(name)
+            if canonical_name not in motion_name_to_idx:
+                raise ValueError(
+                    f"Simulator joint '{name}' is missing from motion joints: {self.motion_joint_names}"
+                )
+            reindex.append(motion_name_to_idx[canonical_name])
+        self.joint_reindex = torch.tensor(reindex, dtype=torch.long, device=self.device)
 
     def _init_indices(self):
         # IsaacGym order[FL, FR, RL, RR].

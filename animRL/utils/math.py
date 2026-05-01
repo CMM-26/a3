@@ -178,3 +178,18 @@ def torch_rand_sqrt_float(lower, upper, shape, device):
 def torch_rand_float_ring(lower, upper, shape, device):
     # type: (float, float, Tuple[int, int], str) -> Tensor
     return torch.sqrt((upper ** 2 - lower ** 2) * torch.rand(*shape, device=device) + lower ** 2)
+
+def random_quat_noise(num, max_angle_rad=0.1, device="cuda"):
+    # random unit axes
+    axis = torch.randn(num, 3, device=device)
+    axis = axis / axis.norm(dim=-1, keepdim=True)
+
+    # small random angles
+    angle = (torch.rand(num, device=device) - 0.5) * 2 * max_angle_rad
+
+    half = angle * 0.5
+    sin_half = torch.sin(half).unsqueeze(-1)
+    cos_half = torch.cos(half).unsqueeze(-1)
+
+    q = torch.cat([axis * sin_half, cos_half], dim=-1)  # (x, y, z, w)
+    return q

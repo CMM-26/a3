@@ -469,8 +469,40 @@ Then add this url to the `results/wandb_url.json` file for the corresponding ent
 Then, push to github and you are done!
 
 # 7. Bonus: Real robot deployment
-There might be a chance for you to try deploying your RL policies on the real robot. 
-Information on this will be announced later.
+If you had fun and succeeded to get a good sim2sim transfer, you can prepare for sim2real transfer. This part is bonus and not graded.
+To deploy a policy on the real robot, you should first train a new policy using the task name `--task=walk-hw-deploy`.
+
+We included some changes to make the policy deployable on the real robot:
+* urdf and mujoco files are updated to more accurate ones
+* motion file changed to a better walking
+
+Don't forget to add the domain randomization that you did in task 3 to make sim2sim work.
+The config is at `animRL/cfg/mimic/walk_hw_deploy_config.py`
+You are allowed to modify the parameters for the deploy task if desired.
+
+After training the policy, first check sim2sim again for the new model:
+```bash
+python animRL/scripts/sim2sim.py --task=walk-hw-deploy --load_run=<your-run-name>
+```
+
+If that looks good, proceed forward for deployment.
+
+1. Run eval script to convert the policy to onnx:
+```bash
+python animRL/scripts/eval.py --task=walk-hw-deploy --load_run=<your-run-name>
+```
+2. Convert to rknn using the dedicated docker image. Do not run this inside the other docker container! Exit that and then run this on the EC2 instance.
+```bash
+docker pull fzargar75/animrl-export:latest
+docker run --rm -it -v "/path/to/your/log-folder/exported:/workspace/exported" fzargar75/animrl-export:latest
+```
+Replace `/path/to/your/log-folder/exported` to the `exported` directory created in step 1.
+The container then automatically converts the `model.onnx` to `model.rknn`. 
+This is a format we need for deploying on the real robot.
+
+3. Rename the policy to `model_groupnumber_groupname.rknn` using your group number and name. 
+Then upload it to the google drive and come to the lab space at the time slot you booked!
+The details of google drive to upload and sheet to book your time are announced in moodle.
 
 # 8. Final thoughts
 Now you have completed this assignment! Congratulations! :party_popper:

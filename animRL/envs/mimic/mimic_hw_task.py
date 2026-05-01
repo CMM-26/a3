@@ -29,6 +29,7 @@ class MimicHWTask(BaseTask):
                                           num_joints=cfg.env.num_actions,
                                           num_ee=len(cfg.asset.ee_offsets.keys())
                                           )
+        self.motion_loader.set_sim_joint_order(self.dof_names)
         assert self.motion_loader.num_motions == 1, "Only one motion clip is supported"
         self.data['motion_loader'] = self.motion_loader
         self.phase_rate = 1.0 / self.motion_loader.trajectory_num_frames[0]
@@ -276,8 +277,15 @@ class MimicHWTask(BaseTask):
         self.root_states[env_ids] = self.base_init_state
         self.root_states[env_ids, :2] += self.env_origins[env_ids, :2]
 
-        # base velocities
-        self.root_states[env_ids, 7:13] = 0
+        if self.cfg.domain_rand.randomize_init_state:
+            self.root_states[env_ids, 2] += torch.clip(torch.randn_like(self.root_states[env_ids, 2]),
+                                                       min=0) * 0.02  # add noise to height
+            quat_noise = random_quat_noise(len(env_ids), 0.2, self.device)
+            self.root_states[env_ids, 3:7] = quat_mul(quat_noise,
+                                                      self.root_states[env_ids, 3:7])  # add noise to orientation
+            self.root_states[env_ids, 7:13] = torch.randn_like(self.root_states[env_ids, 7:13]) * 0.1
+        else:
+            self.root_states[env_ids, 7:13] = 0
         env_ids_int32 = env_ids.to(dtype=torch.int32)
         self.gym.set_actor_root_state_tensor_indexed(self.sim,
                                                      gymtorch.unwrap_tensor(self.root_states),

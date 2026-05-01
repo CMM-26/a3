@@ -96,6 +96,8 @@ class MimicCfg(BaseEnvCfg):
         push_interval_s = 4
         max_push_vel_xyz = 0
         max_push_avel_xyz = 0
+        obs_noise_scale = 0
+        randomize_init_state = False
 
     class termination:
         max_base_lin_vel = 10.0

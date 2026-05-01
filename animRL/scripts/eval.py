@@ -69,9 +69,9 @@ class Eval:
                                                     train_cfg=self.train_cfg)
         self.runner.load(self.load_path)  # load policy
         self.policy = self.runner.get_inference_policy(device=self.env.device)
-        # export_dir = os.path.join(os.path.dirname(self.load_path), "exported")
-        # export_policy_as_onnx(self.runner.policy, export_dir,
-        #                       self.runner.actor_obs_normalizer, filename=f"model.onnx")
+        export_dir = os.path.join(os.path.dirname(self.load_path), "exported")
+        export_policy_as_onnx(self.runner.policy, export_dir,
+                              self.runner.actor_obs_normalizer, filename=f"model.onnx")
 
         self.env.reset()
         self.obs = self.env.get_observations()
@@ -174,7 +174,7 @@ class Eval:
 
 if __name__ == '__main__':
     args = get_args()
-    args.dv = True  # set to True to open simulator viewer (only works if you have a display)
+    args.dv = False  # set to True to open simulator viewer (only works if you have a display)
     seed = 2  # Note: you can change the seed to get a different behavior
     ip = Eval(args, seed)
     ip.play()

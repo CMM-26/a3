@@ -15,8 +15,8 @@ import numpy as np
 import torch
 
 from animRL import ROOT_DIR
-from animRL.cfg.mimic.walk_hw_config import WalkHWCfg
-from animRL.cfg.mimic.walk_hw_config import WalkHWTrainCfg
+from animRL.cfg.mimic.walk_hw_config import WalkHWCfg, WalkHWTrainCfg
+from animRL.cfg.mimic.walk_hw_deploy_config import WalkHWDeployCfg, WalkHWDeployTrainCfg
 from animRL.utils.helpers import get_load_path, update_cfgs_from_dict
 from animRL.runners.modules.normalizer import EmpiricalNormalization
 from animRL.runners.modules.policy import Policy
@@ -47,10 +47,10 @@ def infer_hidden_dims_from_policy_dict(policy_state: dict) -> list[int]:
 
 
 def load_pt_policy(
-    pt_path: Path,
-    num_obs: int,
-    num_actions: int,
-    activation: str,
+        pt_path: Path,
+        num_obs: int,
+        num_actions: int,
+        activation: str,
 ) -> tuple[Policy, EmpiricalNormalization]:
     ckpt = torch.load(str(pt_path), map_location="cpu")
     if "policy_dict" not in ckpt:
@@ -116,12 +116,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--tau_limit", type=float, default=20.0, help="Torque clip (Nm).")
     parser.add_argument("--render_decimation", type=int, default=1, help="Render every N physics steps.")
     parser.add_argument("--no_viewer", action="store_true", help="Headless run.")
+    parser.add_argument("--task", type=str, default="walk-hw", help="Task to run.")
     return parser.parse_args()
 
 
 def run(args: argparse.Namespace) -> None:
-    env_cfg = WalkHWCfg()
-    train_cfg = WalkHWTrainCfg()
+    if args.task == "walk-hw-deploy":
+        env_cfg = WalkHWDeployCfg()
+        train_cfg = WalkHWDeployTrainCfg()
+        args.scene = "animRL/resources/robots/pi_12dof_260120/mjcf/pi_12dof_260120_multi_scene.xml"
+    else:
+        env_cfg = WalkHWCfg()
+        train_cfg = WalkHWTrainCfg()
 
     load_path = get_load_path(
         os.path.join(ROOT_DIR, "logs", train_cfg.runner.experiment_name),
@@ -134,7 +140,7 @@ def run(args: argparse.Namespace) -> None:
     update_cfgs_from_dict(env_cfg, train_cfg, load_config)
     print(f"[INFO] Loading policy from: {load_path}")
 
-    model = mujoco.MjModel.from_xml_path(str(args.scene.resolve()))
+    model = mujoco.MjModel.from_xml_path(str(args.scene))
     data = mujoco.MjData(model)
     mujoco.mj_resetData(model, data)
     model.opt.timestep = args.sim_dt
@@ -162,7 +168,7 @@ def run(args: argparse.Namespace) -> None:
             raise ValueError(f"Missing free joint in scene: {free_name}")
         free_qpos_adr[r] = int(model.jnt_qposadr[jid_free])
         free_qvel_adr[r] = int(model.jnt_dofadr[jid_free])
-        root_xy[r] = data.qpos[free_qpos_adr[r] : free_qpos_adr[r] + 2]
+        root_xy[r] = data.qpos[free_qpos_adr[r]: free_qpos_adr[r] + 2]
 
         for j, jname in enumerate(base_joint_names):
             full = f"r{r}_{jname}"
@@ -207,14 +213,14 @@ def run(args: argparse.Namespace) -> None:
     def reset_robot(r: int) -> None:
         qa = free_qpos_adr[r]
         va = free_qvel_adr[r]
-        data.qpos[qa : qa + 2] = root_xy[r]
+        data.qpos[qa: qa + 2] = root_xy[r]
         data.qpos[qa + 2] = float(env_cfg.init_state.pos[2])
         init_q_xyzw = np.array(env_cfg.init_state.rot, dtype=np.float64)
-        data.qpos[qa + 3 : qa + 7] = np.array(
+        data.qpos[qa + 3: qa + 7] = np.array(
             [init_q_xyzw[3], init_q_xyzw[0], init_q_xyzw[1], init_q_xyzw[2]],
             dtype=np.float64,
         )
-        data.qvel[va : va + 6] = 0.0
+        data.qvel[va: va + 6] = 0.0
         for j in range(num_actions):
             data.qpos[joint_qpos_adr[r, j]] = default_q_base[j]
             data.qvel[joint_qvel_adr[r, j]] = 0.0
@@ -229,9 +235,9 @@ def run(args: argparse.Namespace) -> None:
         for r in range(num_robots):
             qa = free_qpos_adr[r]
             va = free_qvel_adr[r]
-            quat_wxyz = data.qpos[qa + 3 : qa + 7].copy()
+            quat_wxyz = data.qpos[qa + 3: qa + 7].copy()
             quat_xyzw = np.array([quat_wxyz[1], quat_wxyz[2], quat_wxyz[3], quat_wxyz[0]], dtype=np.float64)
-            ang_vel_world = data.qvel[va + 3 : va + 6].astype(np.float64)
+            ang_vel_world = data.qvel[va + 3: va + 6].astype(np.float64)
             base_ang_vel_local = quat_rotate_inverse_xyzw(quat_xyzw, ang_vel_world)
             projected_gravity = quat_rotate_inverse_xyzw(quat_xyzw, np.array([0.0, 0.0, -1.0], dtype=np.float64))
 

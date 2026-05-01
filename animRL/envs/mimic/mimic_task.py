@@ -27,6 +27,7 @@ class MimicTask(BaseTask):
                                           num_joints=cfg.env.num_actions,
                                           num_ee=len(cfg.asset.ee_offsets.keys())
                                           )
+        self.motion_loader.set_sim_joint_order(self.dof_names)
         assert self.motion_loader.num_motions == 1, "Only one motion clip is supported"
         self.data['motion_loader'] = self.motion_loader
         self.phase_rate = 1.0 / self.motion_loader.trajectory_num_frames[0]

@@ -1,0 +1,1070 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mujoco model="pi_12dof_260120_multi_scene">
+  <compiler angle="radian" meshdir="../meshes/" balanceinertia="true" />
+  <default>
+    <joint armature="0.01" />
+    </default>
+  <option timestep="0.001" gravity="0 0 -9.81" />
+  <asset>
+    <mesh name="base_link" file="base_link.STL" />
+    <mesh name="l_ankle_pitch_link" file="l_ankle_pitch_link.STL" />
+    <mesh name="l_ankle_roll_link" file="l_ankle_roll_link.STL" />
+    <mesh name="l_calf_link" file="l_calf_link.STL" />
+    <mesh name="l_hip_pitch_link" file="l_hip_pitch_link.STL" />
+    <mesh name="l_hip_roll_link" file="l_hip_roll_link.STL" />
+    <mesh name="l_thigh_link" file="l_thigh_link.STL" />
+    <mesh name="r_ankle_pitch_link" file="r_ankle_pitch_link.STL" />
+    <mesh name="r_ankle_roll_link" file="r_ankle_roll_link.STL" />
+    <mesh name="r_calf_link" file="r_calf_link.STL" />
+    <mesh name="r_hip_pitch_link" file="r_hip_pitch_link.STL" />
+    <mesh name="r_hip_roll_link" file="r_hip_roll_link.STL" />
+    <mesh name="r_thigh_link" file="r_thigh_link.STL" />
+    <mesh name="torso_link" file="torso_link.STL" />
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="512" />
+    <texture name="texplane" type="2d" builtin="checker" rgb1=".2 .3 .4" rgb2=".1 0.15 0.2" width="512" height="512" mark="cross" markrgb=".8 .8 .8" />
+    <material name="matplane" reflectance="0.0" texture="texplane" texrepeat="1 1" texuniform="true" />
+  </asset>
+  <visual>
+    <quality shadowsize="4096" />
+    <map znear="0.05" />
+  </visual>
+  <worldbody>
+    <light directional="true" diffuse=".4 .4 .4" specular="0.1 0.1 0.1" pos="0 0 5.0" dir="0 0 -1" castshadow="false" />
+    <light directional="true" diffuse=".6 .6 .6" specular="0.2 0.2 0.2" pos="0 0 4" dir="0 0 -1" />
+    <geom name="ground" type="plane" size="0 0 1" pos="0.001 0 0" quat="1 0 0 0" material="matplane" condim="1" conaffinity="15" />
+    <body name="r0_base_link" pos="0 0 0.36">
+      <inertial mass="0.98610884" fullinertia="0.0012749 0.00075879 0.00116235 -2.85e-06 3.57e-06 0.0" pos="-0.00014435 -1.66e-06 -0.04034123" />
+      <freejoint name="r0_floating_base_joint" />
+      <geom type="mesh" mesh="base_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1" />
+      <geom type="mesh" mesh="base_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1" />
+      <body name="r0_torso_link">
+        <inertial mass="1.44421644" fullinertia="0.00478105 0.00627031 0.00482813 -1.64e-06 6.41e-06 -2.36e-06" pos="0.00171631 -3.741e-05 0.07462587" />
+        <geom type="mesh" mesh="torso_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1" />
+        <geom type="mesh" mesh="torso_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1" />
+      </body>
+      <body name="r0_r_hip_pitch_link" pos="0 -0.0475 -0.0435">
+        <inertial mass="0.45931392" fullinertia="0.00027163 0.00026494 0.00027956 1.14e-06 -6.6e-07 -4.1e-07" pos="7.92e-05 -0.03190261 9.097e-05" />
+        <joint name="r0_r_hip_pitch_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-3.12 2.94" />
+        <geom type="mesh" mesh="r_hip_pitch_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1" />
+        <geom type="mesh" mesh="r_hip_pitch_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1" />
+        <body name="r0_r_hip_roll_link" pos="0 -0.034 0">
+          <inertial mass="0.55820116" fullinertia="0.00062111 0.00074025 0.00041298 -1.14e-06 -3.416e-05 -5.5e-07" pos="0.00102172 -0.00033797 -0.05845832" />
+          <joint name="r0_r_hip_roll_joint" type="hinge" axis="1 0 0" damping="0.1" armature="0.01" range="-3.14 0.17" />
+          <geom type="mesh" mesh="r_hip_roll_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1" />
+          <geom type="mesh" mesh="r_hip_roll_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1" />
+          <body name="r0_r_thigh_link" pos="-0.00035 0 -0.0974">
+            <inertial mass="0.15484273" fullinertia="0.00018778 0.00010058 0.00016124 4.5e-07 -8.8e-07 -5.6e-07" pos="0.00064557 -0.00075206 -0.02084055" />
+            <joint name="r0_r_thigh_joint" type="hinge" axis="0 0 1" damping="0.1" armature="0.01" range="-2.87 2.87" />
+            <geom type="mesh" mesh="r_thigh_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1" />
+            <geom type="mesh" mesh="r_thigh_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1" />
+            <body name="r0_r_calf_link" pos="0 0 -0.045">
+              <inertial mass="0.85852308" fullinertia="0.00416941 0.00414652 0.00042931 -6e-08 -9.9e-06 -5.94e-06" pos="-1.001e-05 -0.00237049 -0.06661243" />
+              <joint name="r0_r_calf_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-2.14 2.35" />
+              <geom type="mesh" mesh="r_calf_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1" />
+              <geom type="mesh" mesh="r_calf_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1" />
+              <body name="r0_r_ankle_pitch_link" pos="0 0 -0.14">
+                <inertial mass="0.16352634" fullinertia="0.00011538 0.00020824 0.00028929 4.2e-07 1.65e-06 -6.3e-07" pos="0.00503044 0.00051345 -0.00016685" />
+                <joint name="r0_r_ankle_pitch_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-0.97 0.92" />
+                <geom type="mesh" mesh="r_ankle_pitch_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1" />
+                <body name="r0_r_ankle_roll_link" pos="0.051 0 0">
+                  <inertial mass="0.61662552" fullinertia="0.00054662 0.00150792 0.0013343 -8.4e-07 -0.00025529 8e-07" pos="0.0046213 8.211e-05 -0.01502099" />
+                  <joint name="r0_r_ankle_roll_joint" type="hinge" axis="1 0 0" damping="0.1" armature="0.01" range="-0.78 0.78" />
+                  <geom type="mesh" mesh="r_ankle_roll_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1" />
+                  <geom type="mesh" mesh="r_ankle_roll_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1" />
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="r0_l_hip_pitch_link" pos="0 0.0475 -0.0435">
+        <inertial mass="0.45931808" fullinertia="0.00027163 0.00026494 0.00027956 -1.14e-06 -3.9e-07 -2.25e-06" pos="7.921e-05 0.03190246 -0.0001562" />
+        <joint name="r0_l_hip_pitch_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-3.12 2.94" />
+        <geom type="mesh" mesh="l_hip_pitch_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1" />
+        <geom type="mesh" mesh="l_hip_pitch_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1" />
+        <body name="r0_l_hip_roll_link" pos="0 0.034 0">
+          <inertial mass="0.55820115" fullinertia="0.00062117 0.00074046 0.00041325 -1.07e-06 -3.583e-05 -1.6e-06" pos="0.00087873 1.341e-05 -0.05845832" />
+          <joint name="r0_l_hip_roll_joint" type="hinge" axis="1 0 0" damping="0.1" armature="0.01" range="-0.17 3.14" />
+          <geom type="mesh" mesh="l_hip_roll_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1" />
+          <geom type="mesh" mesh="l_hip_roll_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1" />
+          <body name="r0_l_thigh_link" pos="-0.00035 0 -0.0974">
+            <inertial mass="0.15484236" fullinertia="0.00018778 0.00010057 0.00016122 -2.2e-07 -1.13e-06 5.6e-07" pos="0.00071587 0.00075215 -0.0208406" />
+            <joint name="r0_l_thigh_joint" type="hinge" axis="0 0 1" damping="0.1" armature="0.01" range="-2.87 2.87" />
+            <geom type="mesh" mesh="l_thigh_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1" />
+            <geom type="mesh" mesh="l_thigh_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1" />
+            <body name="r0_l_calf_link" pos="0 0 -0.045">
+              <inertial mass="0.85852288" fullinertia="0.00416941 0.00414651 0.00042931 6e-08 9.73e-06 5.94e-06" pos="-1.001e-05 0.00237048 -0.06661245" />
+              <joint name="r0_l_calf_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-2.14 2.35" />
+              <geom type="mesh" mesh="l_calf_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1" />
+              <geom type="mesh" mesh="l_calf_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1" />
+              <body name="r0_l_ankle_pitch_link" pos="0 0 -0.14">
+                <inertial mass="0.16352634" fullinertia="0.00011538 0.00020824 0.00028929 -4.2e-07 1.65e-06 6.3e-07" pos="0.00503044 -0.00051345 -0.00016685" />
+                <joint name="r0_l_ankle_pitch_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-0.97 0.92" />
+                <geom type="mesh" mesh="l_ankle_pitch_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1" />
+                <body name="r0_l_ankle_roll_link" pos="0.051 0 0">
+                  <inertial mass="0.61662552" fullinertia="0.00054662 0.00150792 0.0013343 -8.4e-07 -0.00025529 8e-07" pos="0.00456214 8.211e-05 -0.01256536" />
+                  <joint name="r0_l_ankle_roll_joint" type="hinge" axis="1 0 0" damping="0.1" armature="0.01" range="-0.78 0.78" />
+                  <geom type="mesh" mesh="l_ankle_roll_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1" />
+                  <geom type="mesh" mesh="l_ankle_roll_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1" />
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+    <body name="r1_base_link" pos="1.4 0 0.36">
+      <inertial mass="0.838192514" fullinertia="0.0012749 0.00075879 0.00116235 -2.85e-06 3.57e-06 0.0" pos="-0.00014435 -1.66e-06 -0.04034123" />
+      <freejoint name="r1_floating_base_joint" />
+      <geom type="mesh" mesh="base_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="0.85" />
+      <geom type="mesh" mesh="base_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="0.85" />
+      <body name="r1_torso_link">
+        <inertial mass="1.22758397" fullinertia="0.00478105 0.00627031 0.00482813 -1.64e-06 6.41e-06 -2.36e-06" pos="0.00171631 -3.741e-05 0.07462587" />
+        <geom type="mesh" mesh="torso_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="0.85" />
+        <geom type="mesh" mesh="torso_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="0.85" />
+      </body>
+      <body name="r1_r_hip_pitch_link" pos="0 -0.0475 -0.0435">
+        <inertial mass="0.390416832" fullinertia="0.00027163 0.00026494 0.00027956 1.14e-06 -6.6e-07 -4.1e-07" pos="7.92e-05 -0.03190261 9.097e-05" />
+        <joint name="r1_r_hip_pitch_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-3.12 2.94" />
+        <geom type="mesh" mesh="r_hip_pitch_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="0.85" />
+        <geom type="mesh" mesh="r_hip_pitch_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="0.85" />
+        <body name="r1_r_hip_roll_link" pos="0 -0.034 0">
+          <inertial mass="0.474470986" fullinertia="0.00062111 0.00074025 0.00041298 -1.14e-06 -3.416e-05 -5.5e-07" pos="0.00102172 -0.00033797 -0.05845832" />
+          <joint name="r1_r_hip_roll_joint" type="hinge" axis="1 0 0" damping="0.1" armature="0.01" range="-3.14 0.17" />
+          <geom type="mesh" mesh="r_hip_roll_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="0.85" />
+          <geom type="mesh" mesh="r_hip_roll_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="0.85" />
+          <body name="r1_r_thigh_link" pos="-0.00035 0 -0.0974">
+            <inertial mass="0.13161632" fullinertia="0.00018778 0.00010058 0.00016124 4.5e-07 -8.8e-07 -5.6e-07" pos="0.00064557 -0.00075206 -0.02084055" />
+            <joint name="r1_r_thigh_joint" type="hinge" axis="0 0 1" damping="0.1" armature="0.01" range="-2.87 2.87" />
+            <geom type="mesh" mesh="r_thigh_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="0.85" />
+            <geom type="mesh" mesh="r_thigh_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="0.85" />
+            <body name="r1_r_calf_link" pos="0 0 -0.045">
+              <inertial mass="0.729744618" fullinertia="0.00416941 0.00414652 0.00042931 -6e-08 -9.9e-06 -5.94e-06" pos="-1.001e-05 -0.00237049 -0.06661243" />
+              <joint name="r1_r_calf_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-2.14 2.35" />
+              <geom type="mesh" mesh="r_calf_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="0.85" />
+              <geom type="mesh" mesh="r_calf_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="0.85" />
+              <body name="r1_r_ankle_pitch_link" pos="0 0 -0.14">
+                <inertial mass="0.138997389" fullinertia="0.00011538 0.00020824 0.00028929 4.2e-07 1.65e-06 -6.3e-07" pos="0.00503044 0.00051345 -0.00016685" />
+                <joint name="r1_r_ankle_pitch_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-0.97 0.92" />
+                <geom type="mesh" mesh="r_ankle_pitch_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="0.85" />
+                <body name="r1_r_ankle_roll_link" pos="0.051 0 0">
+                  <inertial mass="0.524131692" fullinertia="0.00054662 0.00150792 0.0013343 -8.4e-07 -0.00025529 8e-07" pos="0.0046213 8.211e-05 -0.01502099" />
+                  <joint name="r1_r_ankle_roll_joint" type="hinge" axis="1 0 0" damping="0.1" armature="0.01" range="-0.78 0.78" />
+                  <geom type="mesh" mesh="r_ankle_roll_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="0.85" />
+                  <geom type="mesh" mesh="r_ankle_roll_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="0.85" />
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="r1_l_hip_pitch_link" pos="0 0.0475 -0.0435">
+        <inertial mass="0.390420368" fullinertia="0.00027163 0.00026494 0.00027956 -1.14e-06 -3.9e-07 -2.25e-06" pos="7.921e-05 0.03190246 -0.0001562" />
+        <joint name="r1_l_hip_pitch_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-3.12 2.94" />
+        <geom type="mesh" mesh="l_hip_pitch_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="0.85" />
+        <geom type="mesh" mesh="l_hip_pitch_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="0.85" />
+        <body name="r1_l_hip_roll_link" pos="0 0.034 0">
+          <inertial mass="0.474470978" fullinertia="0.00062117 0.00074046 0.00041325 -1.07e-06 -3.583e-05 -1.6e-06" pos="0.00087873 1.341e-05 -0.05845832" />
+          <joint name="r1_l_hip_roll_joint" type="hinge" axis="1 0 0" damping="0.1" armature="0.01" range="-0.17 3.14" />
+          <geom type="mesh" mesh="l_hip_roll_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="0.85" />
+          <geom type="mesh" mesh="l_hip_roll_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="0.85" />
+          <body name="r1_l_thigh_link" pos="-0.00035 0 -0.0974">
+            <inertial mass="0.131616006" fullinertia="0.00018778 0.00010057 0.00016122 -2.2e-07 -1.13e-06 5.6e-07" pos="0.00071587 0.00075215 -0.0208406" />
+            <joint name="r1_l_thigh_joint" type="hinge" axis="0 0 1" damping="0.1" armature="0.01" range="-2.87 2.87" />
+            <geom type="mesh" mesh="l_thigh_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="0.85" />
+            <geom type="mesh" mesh="l_thigh_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="0.85" />
+            <body name="r1_l_calf_link" pos="0 0 -0.045">
+              <inertial mass="0.729744448" fullinertia="0.00416941 0.00414651 0.00042931 6e-08 9.73e-06 5.94e-06" pos="-1.001e-05 0.00237048 -0.06661245" />
+              <joint name="r1_l_calf_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-2.14 2.35" />
+              <geom type="mesh" mesh="l_calf_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="0.85" />
+              <geom type="mesh" mesh="l_calf_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="0.85" />
+              <body name="r1_l_ankle_pitch_link" pos="0 0 -0.14">
+                <inertial mass="0.138997389" fullinertia="0.00011538 0.00020824 0.00028929 -4.2e-07 1.65e-06 6.3e-07" pos="0.00503044 -0.00051345 -0.00016685" />
+                <joint name="r1_l_ankle_pitch_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-0.97 0.92" />
+                <geom type="mesh" mesh="l_ankle_pitch_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="0.85" />
+                <body name="r1_l_ankle_roll_link" pos="0.051 0 0">
+                  <inertial mass="0.524131692" fullinertia="0.00054662 0.00150792 0.0013343 -8.4e-07 -0.00025529 8e-07" pos="0.00456214 8.211e-05 -0.01256536" />
+                  <joint name="r1_l_ankle_roll_joint" type="hinge" axis="1 0 0" damping="0.1" armature="0.01" range="-0.78 0.78" />
+                  <geom type="mesh" mesh="l_ankle_roll_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="0.85" />
+                  <geom type="mesh" mesh="l_ankle_roll_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="0.85" />
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+    <body name="r2_base_link" pos="2.8 0 0.36">
+      <inertial mass="0.887497956" fullinertia="0.0012749 0.00075879 0.00116235 -2.85e-06 3.57e-06 0.0" pos="-0.00014435 -1.66e-06 -0.04034123" />
+      <freejoint name="r2_floating_base_joint" />
+      <geom type="mesh" mesh="base_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="0.9" />
+      <geom type="mesh" mesh="base_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="0.9" />
+      <body name="r2_torso_link">
+        <inertial mass="1.2997948" fullinertia="0.00478105 0.00627031 0.00482813 -1.64e-06 6.41e-06 -2.36e-06" pos="0.00171631 -3.741e-05 0.07462587" />
+        <geom type="mesh" mesh="torso_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="0.9" />
+        <geom type="mesh" mesh="torso_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="0.9" />
+      </body>
+      <body name="r2_r_hip_pitch_link" pos="0 -0.0475 -0.0435">
+        <inertial mass="0.413382528" fullinertia="0.00027163 0.00026494 0.00027956 1.14e-06 -6.6e-07 -4.1e-07" pos="7.92e-05 -0.03190261 9.097e-05" />
+        <joint name="r2_r_hip_pitch_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-3.12 2.94" />
+        <geom type="mesh" mesh="r_hip_pitch_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="0.9" />
+        <geom type="mesh" mesh="r_hip_pitch_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="0.9" />
+        <body name="r2_r_hip_roll_link" pos="0 -0.034 0">
+          <inertial mass="0.502381044" fullinertia="0.00062111 0.00074025 0.00041298 -1.14e-06 -3.416e-05 -5.5e-07" pos="0.00102172 -0.00033797 -0.05845832" />
+          <joint name="r2_r_hip_roll_joint" type="hinge" axis="1 0 0" damping="0.1" armature="0.01" range="-3.14 0.17" />
+          <geom type="mesh" mesh="r_hip_roll_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="0.9" />
+          <geom type="mesh" mesh="r_hip_roll_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="0.9" />
+          <body name="r2_r_thigh_link" pos="-0.00035 0 -0.0974">
+            <inertial mass="0.139358457" fullinertia="0.00018778 0.00010058 0.00016124 4.5e-07 -8.8e-07 -5.6e-07" pos="0.00064557 -0.00075206 -0.02084055" />
+            <joint name="r2_r_thigh_joint" type="hinge" axis="0 0 1" damping="0.1" armature="0.01" range="-2.87 2.87" />
+            <geom type="mesh" mesh="r_thigh_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="0.9" />
+            <geom type="mesh" mesh="r_thigh_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="0.9" />
+            <body name="r2_r_calf_link" pos="0 0 -0.045">
+              <inertial mass="0.772670772" fullinertia="0.00416941 0.00414652 0.00042931 -6e-08 -9.9e-06 -5.94e-06" pos="-1.001e-05 -0.00237049 -0.06661243" />
+              <joint name="r2_r_calf_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-2.14 2.35" />
+              <geom type="mesh" mesh="r_calf_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="0.9" />
+              <geom type="mesh" mesh="r_calf_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="0.9" />
+              <body name="r2_r_ankle_pitch_link" pos="0 0 -0.14">
+                <inertial mass="0.147173706" fullinertia="0.00011538 0.00020824 0.00028929 4.2e-07 1.65e-06 -6.3e-07" pos="0.00503044 0.00051345 -0.00016685" />
+                <joint name="r2_r_ankle_pitch_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-0.97 0.92" />
+                <geom type="mesh" mesh="r_ankle_pitch_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="0.9" />
+                <body name="r2_r_ankle_roll_link" pos="0.051 0 0">
+                  <inertial mass="0.554962968" fullinertia="0.00054662 0.00150792 0.0013343 -8.4e-07 -0.00025529 8e-07" pos="0.0046213 8.211e-05 -0.01502099" />
+                  <joint name="r2_r_ankle_roll_joint" type="hinge" axis="1 0 0" damping="0.1" armature="0.01" range="-0.78 0.78" />
+                  <geom type="mesh" mesh="r_ankle_roll_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="0.9" />
+                  <geom type="mesh" mesh="r_ankle_roll_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="0.9" />
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="r2_l_hip_pitch_link" pos="0 0.0475 -0.0435">
+        <inertial mass="0.413386272" fullinertia="0.00027163 0.00026494 0.00027956 -1.14e-06 -3.9e-07 -2.25e-06" pos="7.921e-05 0.03190246 -0.0001562" />
+        <joint name="r2_l_hip_pitch_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-3.12 2.94" />
+        <geom type="mesh" mesh="l_hip_pitch_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="0.9" />
+        <geom type="mesh" mesh="l_hip_pitch_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="0.9" />
+        <body name="r2_l_hip_roll_link" pos="0 0.034 0">
+          <inertial mass="0.502381035" fullinertia="0.00062117 0.00074046 0.00041325 -1.07e-06 -3.583e-05 -1.6e-06" pos="0.00087873 1.341e-05 -0.05845832" />
+          <joint name="r2_l_hip_roll_joint" type="hinge" axis="1 0 0" damping="0.1" armature="0.01" range="-0.17 3.14" />
+          <geom type="mesh" mesh="l_hip_roll_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="0.9" />
+          <geom type="mesh" mesh="l_hip_roll_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="0.9" />
+          <body name="r2_l_thigh_link" pos="-0.00035 0 -0.0974">
+            <inertial mass="0.139358124" fullinertia="0.00018778 0.00010057 0.00016122 -2.2e-07 -1.13e-06 5.6e-07" pos="0.00071587 0.00075215 -0.0208406" />
+            <joint name="r2_l_thigh_joint" type="hinge" axis="0 0 1" damping="0.1" armature="0.01" range="-2.87 2.87" />
+            <geom type="mesh" mesh="l_thigh_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="0.9" />
+            <geom type="mesh" mesh="l_thigh_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="0.9" />
+            <body name="r2_l_calf_link" pos="0 0 -0.045">
+              <inertial mass="0.772670592" fullinertia="0.00416941 0.00414651 0.00042931 6e-08 9.73e-06 5.94e-06" pos="-1.001e-05 0.00237048 -0.06661245" />
+              <joint name="r2_l_calf_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-2.14 2.35" />
+              <geom type="mesh" mesh="l_calf_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="0.9" />
+              <geom type="mesh" mesh="l_calf_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="0.9" />
+              <body name="r2_l_ankle_pitch_link" pos="0 0 -0.14">
+                <inertial mass="0.147173706" fullinertia="0.00011538 0.00020824 0.00028929 -4.2e-07 1.65e-06 6.3e-07" pos="0.00503044 -0.00051345 -0.00016685" />
+                <joint name="r2_l_ankle_pitch_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-0.97 0.92" />
+                <geom type="mesh" mesh="l_ankle_pitch_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="0.9" />
+                <body name="r2_l_ankle_roll_link" pos="0.051 0 0">
+                  <inertial mass="0.554962968" fullinertia="0.00054662 0.00150792 0.0013343 -8.4e-07 -0.00025529 8e-07" pos="0.00456214 8.211e-05 -0.01256536" />
+                  <joint name="r2_l_ankle_roll_joint" type="hinge" axis="1 0 0" damping="0.1" armature="0.01" range="-0.78 0.78" />
+                  <geom type="mesh" mesh="l_ankle_roll_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="0.9" />
+                  <geom type="mesh" mesh="l_ankle_roll_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="0.9" />
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+    <body name="r3_base_link" pos="4.2 0 0.36">
+      <inertial mass="0.98610884" fullinertia="0.0012749 0.00075879 0.00116235 -2.85e-06 3.57e-06 0.0" pos="-0.00014435 -1.66e-06 -0.04034123" />
+      <freejoint name="r3_floating_base_joint" />
+      <geom type="mesh" mesh="base_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1" />
+      <geom type="mesh" mesh="base_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1" />
+      <body name="r3_torso_link">
+        <inertial mass="1.44421644" fullinertia="0.00478105 0.00627031 0.00482813 -1.64e-06 6.41e-06 -2.36e-06" pos="0.00171631 -3.741e-05 0.07462587" />
+        <geom type="mesh" mesh="torso_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1" />
+        <geom type="mesh" mesh="torso_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1" />
+      </body>
+      <body name="r3_r_hip_pitch_link" pos="0 -0.0475 -0.0435">
+        <inertial mass="0.45931392" fullinertia="0.00027163 0.00026494 0.00027956 1.14e-06 -6.6e-07 -4.1e-07" pos="7.92e-05 -0.03190261 9.097e-05" />
+        <joint name="r3_r_hip_pitch_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-3.12 2.94" />
+        <geom type="mesh" mesh="r_hip_pitch_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1" />
+        <geom type="mesh" mesh="r_hip_pitch_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1" />
+        <body name="r3_r_hip_roll_link" pos="0 -0.034 0">
+          <inertial mass="0.55820116" fullinertia="0.00062111 0.00074025 0.00041298 -1.14e-06 -3.416e-05 -5.5e-07" pos="0.00102172 -0.00033797 -0.05845832" />
+          <joint name="r3_r_hip_roll_joint" type="hinge" axis="1 0 0" damping="0.1" armature="0.01" range="-3.14 0.17" />
+          <geom type="mesh" mesh="r_hip_roll_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1" />
+          <geom type="mesh" mesh="r_hip_roll_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1" />
+          <body name="r3_r_thigh_link" pos="-0.00035 0 -0.0974">
+            <inertial mass="0.15484273" fullinertia="0.00018778 0.00010058 0.00016124 4.5e-07 -8.8e-07 -5.6e-07" pos="0.00064557 -0.00075206 -0.02084055" />
+            <joint name="r3_r_thigh_joint" type="hinge" axis="0 0 1" damping="0.1" armature="0.01" range="-2.87 2.87" />
+            <geom type="mesh" mesh="r_thigh_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1" />
+            <geom type="mesh" mesh="r_thigh_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1" />
+            <body name="r3_r_calf_link" pos="0 0 -0.045">
+              <inertial mass="0.85852308" fullinertia="0.00416941 0.00414652 0.00042931 -6e-08 -9.9e-06 -5.94e-06" pos="-1.001e-05 -0.00237049 -0.06661243" />
+              <joint name="r3_r_calf_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-2.14 2.35" />
+              <geom type="mesh" mesh="r_calf_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1" />
+              <geom type="mesh" mesh="r_calf_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1" />
+              <body name="r3_r_ankle_pitch_link" pos="0 0 -0.14">
+                <inertial mass="0.16352634" fullinertia="0.00011538 0.00020824 0.00028929 4.2e-07 1.65e-06 -6.3e-07" pos="0.00503044 0.00051345 -0.00016685" />
+                <joint name="r3_r_ankle_pitch_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-0.97 0.92" />
+                <geom type="mesh" mesh="r_ankle_pitch_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1" />
+                <body name="r3_r_ankle_roll_link" pos="0.051 0 0">
+                  <inertial mass="0.61662552" fullinertia="0.00054662 0.00150792 0.0013343 -8.4e-07 -0.00025529 8e-07" pos="0.0046213 8.211e-05 -0.01502099" />
+                  <joint name="r3_r_ankle_roll_joint" type="hinge" axis="1 0 0" damping="0.1" armature="0.01" range="-0.78 0.78" />
+                  <geom type="mesh" mesh="r_ankle_roll_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1" />
+                  <geom type="mesh" mesh="r_ankle_roll_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1" />
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="r3_l_hip_pitch_link" pos="0 0.0475 -0.0435">
+        <inertial mass="0.45931808" fullinertia="0.00027163 0.00026494 0.00027956 -1.14e-06 -3.9e-07 -2.25e-06" pos="7.921e-05 0.03190246 -0.0001562" />
+        <joint name="r3_l_hip_pitch_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-3.12 2.94" />
+        <geom type="mesh" mesh="l_hip_pitch_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1" />
+        <geom type="mesh" mesh="l_hip_pitch_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1" />
+        <body name="r3_l_hip_roll_link" pos="0 0.034 0">
+          <inertial mass="0.55820115" fullinertia="0.00062117 0.00074046 0.00041325 -1.07e-06 -3.583e-05 -1.6e-06" pos="0.00087873 1.341e-05 -0.05845832" />
+          <joint name="r3_l_hip_roll_joint" type="hinge" axis="1 0 0" damping="0.1" armature="0.01" range="-0.17 3.14" />
+          <geom type="mesh" mesh="l_hip_roll_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1" />
+          <geom type="mesh" mesh="l_hip_roll_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1" />
+          <body name="r3_l_thigh_link" pos="-0.00035 0 -0.0974">
+            <inertial mass="0.15484236" fullinertia="0.00018778 0.00010057 0.00016122 -2.2e-07 -1.13e-06 5.6e-07" pos="0.00071587 0.00075215 -0.0208406" />
+            <joint name="r3_l_thigh_joint" type="hinge" axis="0 0 1" damping="0.1" armature="0.01" range="-2.87 2.87" />
+            <geom type="mesh" mesh="l_thigh_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1" />
+            <geom type="mesh" mesh="l_thigh_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1" />
+            <body name="r3_l_calf_link" pos="0 0 -0.045">
+              <inertial mass="0.85852288" fullinertia="0.00416941 0.00414651 0.00042931 6e-08 9.73e-06 5.94e-06" pos="-1.001e-05 0.00237048 -0.06661245" />
+              <joint name="r3_l_calf_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-2.14 2.35" />
+              <geom type="mesh" mesh="l_calf_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1" />
+              <geom type="mesh" mesh="l_calf_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1" />
+              <body name="r3_l_ankle_pitch_link" pos="0 0 -0.14">
+                <inertial mass="0.16352634" fullinertia="0.00011538 0.00020824 0.00028929 -4.2e-07 1.65e-06 6.3e-07" pos="0.00503044 -0.00051345 -0.00016685" />
+                <joint name="r3_l_ankle_pitch_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-0.97 0.92" />
+                <geom type="mesh" mesh="l_ankle_pitch_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1" />
+                <body name="r3_l_ankle_roll_link" pos="0.051 0 0">
+                  <inertial mass="0.61662552" fullinertia="0.00054662 0.00150792 0.0013343 -8.4e-07 -0.00025529 8e-07" pos="0.00456214 8.211e-05 -0.01256536" />
+                  <joint name="r3_l_ankle_roll_joint" type="hinge" axis="1 0 0" damping="0.1" armature="0.01" range="-0.78 0.78" />
+                  <geom type="mesh" mesh="l_ankle_roll_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1" />
+                  <geom type="mesh" mesh="l_ankle_roll_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1" />
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+    <body name="r4_base_link" pos="5.6 0 0.36">
+      <inertial mass="1.08471972" fullinertia="0.0012749 0.00075879 0.00116235 -2.85e-06 3.57e-06 0.0" pos="-0.00014435 -1.66e-06 -0.04034123" />
+      <freejoint name="r4_floating_base_joint" />
+      <geom type="mesh" mesh="base_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1.1" />
+      <geom type="mesh" mesh="base_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1.1" />
+      <body name="r4_torso_link">
+        <inertial mass="1.58863808" fullinertia="0.00478105 0.00627031 0.00482813 -1.64e-06 6.41e-06 -2.36e-06" pos="0.00171631 -3.741e-05 0.07462587" />
+        <geom type="mesh" mesh="torso_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1.1" />
+        <geom type="mesh" mesh="torso_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1.1" />
+      </body>
+      <body name="r4_r_hip_pitch_link" pos="0 -0.0475 -0.0435">
+        <inertial mass="0.505245312" fullinertia="0.00027163 0.00026494 0.00027956 1.14e-06 -6.6e-07 -4.1e-07" pos="7.92e-05 -0.03190261 9.097e-05" />
+        <joint name="r4_r_hip_pitch_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-3.12 2.94" />
+        <geom type="mesh" mesh="r_hip_pitch_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1.1" />
+        <geom type="mesh" mesh="r_hip_pitch_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1.1" />
+        <body name="r4_r_hip_roll_link" pos="0 -0.034 0">
+          <inertial mass="0.614021276" fullinertia="0.00062111 0.00074025 0.00041298 -1.14e-06 -3.416e-05 -5.5e-07" pos="0.00102172 -0.00033797 -0.05845832" />
+          <joint name="r4_r_hip_roll_joint" type="hinge" axis="1 0 0" damping="0.1" armature="0.01" range="-3.14 0.17" />
+          <geom type="mesh" mesh="r_hip_roll_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1.1" />
+          <geom type="mesh" mesh="r_hip_roll_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1.1" />
+          <body name="r4_r_thigh_link" pos="-0.00035 0 -0.0974">
+            <inertial mass="0.170327003" fullinertia="0.00018778 0.00010058 0.00016124 4.5e-07 -8.8e-07 -5.6e-07" pos="0.00064557 -0.00075206 -0.02084055" />
+            <joint name="r4_r_thigh_joint" type="hinge" axis="0 0 1" damping="0.1" armature="0.01" range="-2.87 2.87" />
+            <geom type="mesh" mesh="r_thigh_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1.1" />
+            <geom type="mesh" mesh="r_thigh_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1.1" />
+            <body name="r4_r_calf_link" pos="0 0 -0.045">
+              <inertial mass="0.944375388" fullinertia="0.00416941 0.00414652 0.00042931 -6e-08 -9.9e-06 -5.94e-06" pos="-1.001e-05 -0.00237049 -0.06661243" />
+              <joint name="r4_r_calf_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-2.14 2.35" />
+              <geom type="mesh" mesh="r_calf_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1.1" />
+              <geom type="mesh" mesh="r_calf_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1.1" />
+              <body name="r4_r_ankle_pitch_link" pos="0 0 -0.14">
+                <inertial mass="0.179878974" fullinertia="0.00011538 0.00020824 0.00028929 4.2e-07 1.65e-06 -6.3e-07" pos="0.00503044 0.00051345 -0.00016685" />
+                <joint name="r4_r_ankle_pitch_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-0.97 0.92" />
+                <geom type="mesh" mesh="r_ankle_pitch_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1.1" />
+                <body name="r4_r_ankle_roll_link" pos="0.051 0 0">
+                  <inertial mass="0.678288072" fullinertia="0.00054662 0.00150792 0.0013343 -8.4e-07 -0.00025529 8e-07" pos="0.0046213 8.211e-05 -0.01502099" />
+                  <joint name="r4_r_ankle_roll_joint" type="hinge" axis="1 0 0" damping="0.1" armature="0.01" range="-0.78 0.78" />
+                  <geom type="mesh" mesh="r_ankle_roll_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1.1" />
+                  <geom type="mesh" mesh="r_ankle_roll_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1.1" />
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="r4_l_hip_pitch_link" pos="0 0.0475 -0.0435">
+        <inertial mass="0.505249888" fullinertia="0.00027163 0.00026494 0.00027956 -1.14e-06 -3.9e-07 -2.25e-06" pos="7.921e-05 0.03190246 -0.0001562" />
+        <joint name="r4_l_hip_pitch_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-3.12 2.94" />
+        <geom type="mesh" mesh="l_hip_pitch_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1.1" />
+        <geom type="mesh" mesh="l_hip_pitch_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1.1" />
+        <body name="r4_l_hip_roll_link" pos="0 0.034 0">
+          <inertial mass="0.614021265" fullinertia="0.00062117 0.00074046 0.00041325 -1.07e-06 -3.583e-05 -1.6e-06" pos="0.00087873 1.341e-05 -0.05845832" />
+          <joint name="r4_l_hip_roll_joint" type="hinge" axis="1 0 0" damping="0.1" armature="0.01" range="-0.17 3.14" />
+          <geom type="mesh" mesh="l_hip_roll_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1.1" />
+          <geom type="mesh" mesh="l_hip_roll_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1.1" />
+          <body name="r4_l_thigh_link" pos="-0.00035 0 -0.0974">
+            <inertial mass="0.170326596" fullinertia="0.00018778 0.00010057 0.00016122 -2.2e-07 -1.13e-06 5.6e-07" pos="0.00071587 0.00075215 -0.0208406" />
+            <joint name="r4_l_thigh_joint" type="hinge" axis="0 0 1" damping="0.1" armature="0.01" range="-2.87 2.87" />
+            <geom type="mesh" mesh="l_thigh_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1.1" />
+            <geom type="mesh" mesh="l_thigh_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1.1" />
+            <body name="r4_l_calf_link" pos="0 0 -0.045">
+              <inertial mass="0.944375168" fullinertia="0.00416941 0.00414651 0.00042931 6e-08 9.73e-06 5.94e-06" pos="-1.001e-05 0.00237048 -0.06661245" />
+              <joint name="r4_l_calf_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-2.14 2.35" />
+              <geom type="mesh" mesh="l_calf_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1.1" />
+              <geom type="mesh" mesh="l_calf_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1.1" />
+              <body name="r4_l_ankle_pitch_link" pos="0 0 -0.14">
+                <inertial mass="0.179878974" fullinertia="0.00011538 0.00020824 0.00028929 -4.2e-07 1.65e-06 6.3e-07" pos="0.00503044 -0.00051345 -0.00016685" />
+                <joint name="r4_l_ankle_pitch_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-0.97 0.92" />
+                <geom type="mesh" mesh="l_ankle_pitch_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1.1" />
+                <body name="r4_l_ankle_roll_link" pos="0.051 0 0">
+                  <inertial mass="0.678288072" fullinertia="0.00054662 0.00150792 0.0013343 -8.4e-07 -0.00025529 8e-07" pos="0.00456214 8.211e-05 -0.01256536" />
+                  <joint name="r4_l_ankle_roll_joint" type="hinge" axis="1 0 0" damping="0.1" armature="0.01" range="-0.78 0.78" />
+                  <geom type="mesh" mesh="l_ankle_roll_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1.1" />
+                  <geom type="mesh" mesh="l_ankle_roll_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1.1" />
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+    <body name="r5_base_link" pos="7 0 0.36">
+      <inertial mass="1.18333061" fullinertia="0.0012749 0.00075879 0.00116235 -2.85e-06 3.57e-06 0.0" pos="-0.00014435 -1.66e-06 -0.04034123" />
+      <freejoint name="r5_floating_base_joint" />
+      <geom type="mesh" mesh="base_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1.2" />
+      <geom type="mesh" mesh="base_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1.2" />
+      <body name="r5_torso_link">
+        <inertial mass="1.73305973" fullinertia="0.00478105 0.00627031 0.00482813 -1.64e-06 6.41e-06 -2.36e-06" pos="0.00171631 -3.741e-05 0.07462587" />
+        <geom type="mesh" mesh="torso_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1.2" />
+        <geom type="mesh" mesh="torso_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1.2" />
+      </body>
+      <body name="r5_r_hip_pitch_link" pos="0 -0.0475 -0.0435">
+        <inertial mass="0.551176704" fullinertia="0.00027163 0.00026494 0.00027956 1.14e-06 -6.6e-07 -4.1e-07" pos="7.92e-05 -0.03190261 9.097e-05" />
+        <joint name="r5_r_hip_pitch_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-3.12 2.94" />
+        <geom type="mesh" mesh="r_hip_pitch_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1.2" />
+        <geom type="mesh" mesh="r_hip_pitch_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1.2" />
+        <body name="r5_r_hip_roll_link" pos="0 -0.034 0">
+          <inertial mass="0.669841392" fullinertia="0.00062111 0.00074025 0.00041298 -1.14e-06 -3.416e-05 -5.5e-07" pos="0.00102172 -0.00033797 -0.05845832" />
+          <joint name="r5_r_hip_roll_joint" type="hinge" axis="1 0 0" damping="0.1" armature="0.01" range="-3.14 0.17" />
+          <geom type="mesh" mesh="r_hip_roll_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1.2" />
+          <geom type="mesh" mesh="r_hip_roll_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1.2" />
+          <body name="r5_r_thigh_link" pos="-0.00035 0 -0.0974">
+            <inertial mass="0.185811276" fullinertia="0.00018778 0.00010058 0.00016124 4.5e-07 -8.8e-07 -5.6e-07" pos="0.00064557 -0.00075206 -0.02084055" />
+            <joint name="r5_r_thigh_joint" type="hinge" axis="0 0 1" damping="0.1" armature="0.01" range="-2.87 2.87" />
+            <geom type="mesh" mesh="r_thigh_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1.2" />
+            <geom type="mesh" mesh="r_thigh_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1.2" />
+            <body name="r5_r_calf_link" pos="0 0 -0.045">
+              <inertial mass="1.0302277" fullinertia="0.00416941 0.00414652 0.00042931 -6e-08 -9.9e-06 -5.94e-06" pos="-1.001e-05 -0.00237049 -0.06661243" />
+              <joint name="r5_r_calf_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-2.14 2.35" />
+              <geom type="mesh" mesh="r_calf_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1.2" />
+              <geom type="mesh" mesh="r_calf_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1.2" />
+              <body name="r5_r_ankle_pitch_link" pos="0 0 -0.14">
+                <inertial mass="0.196231608" fullinertia="0.00011538 0.00020824 0.00028929 4.2e-07 1.65e-06 -6.3e-07" pos="0.00503044 0.00051345 -0.00016685" />
+                <joint name="r5_r_ankle_pitch_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-0.97 0.92" />
+                <geom type="mesh" mesh="r_ankle_pitch_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1.2" />
+                <body name="r5_r_ankle_roll_link" pos="0.051 0 0">
+                  <inertial mass="0.739950624" fullinertia="0.00054662 0.00150792 0.0013343 -8.4e-07 -0.00025529 8e-07" pos="0.0046213 8.211e-05 -0.01502099" />
+                  <joint name="r5_r_ankle_roll_joint" type="hinge" axis="1 0 0" damping="0.1" armature="0.01" range="-0.78 0.78" />
+                  <geom type="mesh" mesh="r_ankle_roll_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1.2" />
+                  <geom type="mesh" mesh="r_ankle_roll_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1.2" />
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="r5_l_hip_pitch_link" pos="0 0.0475 -0.0435">
+        <inertial mass="0.551181696" fullinertia="0.00027163 0.00026494 0.00027956 -1.14e-06 -3.9e-07 -2.25e-06" pos="7.921e-05 0.03190246 -0.0001562" />
+        <joint name="r5_l_hip_pitch_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-3.12 2.94" />
+        <geom type="mesh" mesh="l_hip_pitch_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1.2" />
+        <geom type="mesh" mesh="l_hip_pitch_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1.2" />
+        <body name="r5_l_hip_roll_link" pos="0 0.034 0">
+          <inertial mass="0.66984138" fullinertia="0.00062117 0.00074046 0.00041325 -1.07e-06 -3.583e-05 -1.6e-06" pos="0.00087873 1.341e-05 -0.05845832" />
+          <joint name="r5_l_hip_roll_joint" type="hinge" axis="1 0 0" damping="0.1" armature="0.01" range="-0.17 3.14" />
+          <geom type="mesh" mesh="l_hip_roll_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1.2" />
+          <geom type="mesh" mesh="l_hip_roll_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1.2" />
+          <body name="r5_l_thigh_link" pos="-0.00035 0 -0.0974">
+            <inertial mass="0.185810832" fullinertia="0.00018778 0.00010057 0.00016122 -2.2e-07 -1.13e-06 5.6e-07" pos="0.00071587 0.00075215 -0.0208406" />
+            <joint name="r5_l_thigh_joint" type="hinge" axis="0 0 1" damping="0.1" armature="0.01" range="-2.87 2.87" />
+            <geom type="mesh" mesh="l_thigh_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1.2" />
+            <geom type="mesh" mesh="l_thigh_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1.2" />
+            <body name="r5_l_calf_link" pos="0 0 -0.045">
+              <inertial mass="1.03022746" fullinertia="0.00416941 0.00414651 0.00042931 6e-08 9.73e-06 5.94e-06" pos="-1.001e-05 0.00237048 -0.06661245" />
+              <joint name="r5_l_calf_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-2.14 2.35" />
+              <geom type="mesh" mesh="l_calf_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1.2" />
+              <geom type="mesh" mesh="l_calf_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1.2" />
+              <body name="r5_l_ankle_pitch_link" pos="0 0 -0.14">
+                <inertial mass="0.196231608" fullinertia="0.00011538 0.00020824 0.00028929 -4.2e-07 1.65e-06 6.3e-07" pos="0.00503044 -0.00051345 -0.00016685" />
+                <joint name="r5_l_ankle_pitch_joint" type="hinge" axis="0 1 0" damping="0.1" armature="0.01" range="-0.97 0.92" />
+                <geom type="mesh" mesh="l_ankle_pitch_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1.2" />
+                <body name="r5_l_ankle_roll_link" pos="0.051 0 0">
+                  <inertial mass="0.739950624" fullinertia="0.00054662 0.00150792 0.0013343 -8.4e-07 -0.00025529 8e-07" pos="0.00456214 8.211e-05 -0.01256536" />
+                  <joint name="r5_l_ankle_roll_joint" type="hinge" axis="1 0 0" damping="0.1" armature="0.01" range="-0.78 0.78" />
+                  <geom type="mesh" mesh="l_ankle_roll_link" group="1" rgba="0.752941 0.752941 0.752941 1" contype="0" conaffinity="0" friction="1.2" />
+                  <geom type="mesh" mesh="l_ankle_roll_link" group="0" rgba="0.752941 0.752941 0.752941 1" friction="1.2" />
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <contact>
+    <exclude body1="r0_base_link" body2="r0_torso_link" />
+    <exclude body1="r0_base_link" body2="r0_r_hip_pitch_link" />
+    <exclude body1="r0_base_link" body2="r0_r_hip_roll_link" />
+    <exclude body1="r0_base_link" body2="r0_r_thigh_link" />
+    <exclude body1="r0_base_link" body2="r0_r_calf_link" />
+    <exclude body1="r0_base_link" body2="r0_r_ankle_pitch_link" />
+    <exclude body1="r0_base_link" body2="r0_r_ankle_roll_link" />
+    <exclude body1="r0_base_link" body2="r0_l_hip_pitch_link" />
+    <exclude body1="r0_base_link" body2="r0_l_hip_roll_link" />
+    <exclude body1="r0_base_link" body2="r0_l_thigh_link" />
+    <exclude body1="r0_base_link" body2="r0_l_calf_link" />
+    <exclude body1="r0_base_link" body2="r0_l_ankle_pitch_link" />
+    <exclude body1="r0_base_link" body2="r0_l_ankle_roll_link" />
+    <exclude body1="r0_torso_link" body2="r0_r_hip_pitch_link" />
+    <exclude body1="r0_torso_link" body2="r0_r_hip_roll_link" />
+    <exclude body1="r0_torso_link" body2="r0_r_thigh_link" />
+    <exclude body1="r0_torso_link" body2="r0_r_calf_link" />
+    <exclude body1="r0_torso_link" body2="r0_r_ankle_pitch_link" />
+    <exclude body1="r0_torso_link" body2="r0_r_ankle_roll_link" />
+    <exclude body1="r0_torso_link" body2="r0_l_hip_pitch_link" />
+    <exclude body1="r0_torso_link" body2="r0_l_hip_roll_link" />
+    <exclude body1="r0_torso_link" body2="r0_l_thigh_link" />
+    <exclude body1="r0_torso_link" body2="r0_l_calf_link" />
+    <exclude body1="r0_torso_link" body2="r0_l_ankle_pitch_link" />
+    <exclude body1="r0_torso_link" body2="r0_l_ankle_roll_link" />
+    <exclude body1="r0_r_hip_pitch_link" body2="r0_r_hip_roll_link" />
+    <exclude body1="r0_r_hip_pitch_link" body2="r0_r_thigh_link" />
+    <exclude body1="r0_r_hip_pitch_link" body2="r0_r_calf_link" />
+    <exclude body1="r0_r_hip_pitch_link" body2="r0_r_ankle_pitch_link" />
+    <exclude body1="r0_r_hip_pitch_link" body2="r0_r_ankle_roll_link" />
+    <exclude body1="r0_r_hip_pitch_link" body2="r0_l_hip_pitch_link" />
+    <exclude body1="r0_r_hip_pitch_link" body2="r0_l_hip_roll_link" />
+    <exclude body1="r0_r_hip_pitch_link" body2="r0_l_thigh_link" />
+    <exclude body1="r0_r_hip_pitch_link" body2="r0_l_calf_link" />
+    <exclude body1="r0_r_hip_pitch_link" body2="r0_l_ankle_pitch_link" />
+    <exclude body1="r0_r_hip_pitch_link" body2="r0_l_ankle_roll_link" />
+    <exclude body1="r0_r_hip_roll_link" body2="r0_r_thigh_link" />
+    <exclude body1="r0_r_hip_roll_link" body2="r0_r_calf_link" />
+    <exclude body1="r0_r_hip_roll_link" body2="r0_r_ankle_pitch_link" />
+    <exclude body1="r0_r_hip_roll_link" body2="r0_r_ankle_roll_link" />
+    <exclude body1="r0_r_hip_roll_link" body2="r0_l_hip_pitch_link" />
+    <exclude body1="r0_r_hip_roll_link" body2="r0_l_hip_roll_link" />
+    <exclude body1="r0_r_hip_roll_link" body2="r0_l_thigh_link" />
+    <exclude body1="r0_r_hip_roll_link" body2="r0_l_calf_link" />
+    <exclude body1="r0_r_hip_roll_link" body2="r0_l_ankle_pitch_link" />
+    <exclude body1="r0_r_hip_roll_link" body2="r0_l_ankle_roll_link" />
+    <exclude body1="r0_r_thigh_link" body2="r0_r_calf_link" />
+    <exclude body1="r0_r_thigh_link" body2="r0_r_ankle_pitch_link" />
+    <exclude body1="r0_r_thigh_link" body2="r0_r_ankle_roll_link" />
+    <exclude body1="r0_r_thigh_link" body2="r0_l_hip_pitch_link" />
+    <exclude body1="r0_r_thigh_link" body2="r0_l_hip_roll_link" />
+    <exclude body1="r0_r_thigh_link" body2="r0_l_thigh_link" />
+    <exclude body1="r0_r_thigh_link" body2="r0_l_calf_link" />
+    <exclude body1="r0_r_thigh_link" body2="r0_l_ankle_pitch_link" />
+    <exclude body1="r0_r_thigh_link" body2="r0_l_ankle_roll_link" />
+    <exclude body1="r0_r_calf_link" body2="r0_r_ankle_pitch_link" />
+    <exclude body1="r0_r_calf_link" body2="r0_r_ankle_roll_link" />
+    <exclude body1="r0_r_calf_link" body2="r0_l_hip_pitch_link" />
+    <exclude body1="r0_r_calf_link" body2="r0_l_hip_roll_link" />
+    <exclude body1="r0_r_calf_link" body2="r0_l_thigh_link" />
+    <exclude body1="r0_r_calf_link" body2="r0_l_calf_link" />
+    <exclude body1="r0_r_calf_link" body2="r0_l_ankle_pitch_link" />
+    <exclude body1="r0_r_calf_link" body2="r0_l_ankle_roll_link" />
+    <exclude body1="r0_r_ankle_pitch_link" body2="r0_r_ankle_roll_link" />
+    <exclude body1="r0_r_ankle_pitch_link" body2="r0_l_hip_pitch_link" />
+    <exclude body1="r0_r_ankle_pitch_link" body2="r0_l_hip_roll_link" />
+    <exclude body1="r0_r_ankle_pitch_link" body2="r0_l_thigh_link" />
+    <exclude body1="r0_r_ankle_pitch_link" body2="r0_l_calf_link" />
+    <exclude body1="r0_r_ankle_pitch_link" body2="r0_l_ankle_pitch_link" />
+    <exclude body1="r0_r_ankle_pitch_link" body2="r0_l_ankle_roll_link" />
+    <exclude body1="r0_r_ankle_roll_link" body2="r0_l_hip_pitch_link" />
+    <exclude body1="r0_r_ankle_roll_link" body2="r0_l_hip_roll_link" />
+    <exclude body1="r0_r_ankle_roll_link" body2="r0_l_thigh_link" />
+    <exclude body1="r0_r_ankle_roll_link" body2="r0_l_calf_link" />
+    <exclude body1="r0_r_ankle_roll_link" body2="r0_l_ankle_pitch_link" />
+    <exclude body1="r0_r_ankle_roll_link" body2="r0_l_ankle_roll_link" />
+    <exclude body1="r0_l_hip_pitch_link" body2="r0_l_hip_roll_link" />
+    <exclude body1="r0_l_hip_pitch_link" body2="r0_l_thigh_link" />
+    <exclude body1="r0_l_hip_pitch_link" body2="r0_l_calf_link" />
+    <exclude body1="r0_l_hip_pitch_link" body2="r0_l_ankle_pitch_link" />
+    <exclude body1="r0_l_hip_pitch_link" body2="r0_l_ankle_roll_link" />
+    <exclude body1="r0_l_hip_roll_link" body2="r0_l_thigh_link" />
+    <exclude body1="r0_l_hip_roll_link" body2="r0_l_calf_link" />
+    <exclude body1="r0_l_hip_roll_link" body2="r0_l_ankle_pitch_link" />
+    <exclude body1="r0_l_hip_roll_link" body2="r0_l_ankle_roll_link" />
+    <exclude body1="r0_l_thigh_link" body2="r0_l_calf_link" />
+    <exclude body1="r0_l_thigh_link" body2="r0_l_ankle_pitch_link" />
+    <exclude body1="r0_l_thigh_link" body2="r0_l_ankle_roll_link" />
+    <exclude body1="r0_l_calf_link" body2="r0_l_ankle_pitch_link" />
+    <exclude body1="r0_l_calf_link" body2="r0_l_ankle_roll_link" />
+    <exclude body1="r0_l_ankle_pitch_link" body2="r0_l_ankle_roll_link" />
+    <exclude body1="r1_base_link" body2="r1_torso_link" />
+    <exclude body1="r1_base_link" body2="r1_r_hip_pitch_link" />
+    <exclude body1="r1_base_link" body2="r1_r_hip_roll_link" />
+    <exclude body1="r1_base_link" body2="r1_r_thigh_link" />
+    <exclude body1="r1_base_link" body2="r1_r_calf_link" />
+    <exclude body1="r1_base_link" body2="r1_r_ankle_pitch_link" />
+    <exclude body1="r1_base_link" body2="r1_r_ankle_roll_link" />
+    <exclude body1="r1_base_link" body2="r1_l_hip_pitch_link" />
+    <exclude body1="r1_base_link" body2="r1_l_hip_roll_link" />
+    <exclude body1="r1_base_link" body2="r1_l_thigh_link" />
+    <exclude body1="r1_base_link" body2="r1_l_calf_link" />
+    <exclude body1="r1_base_link" body2="r1_l_ankle_pitch_link" />
+    <exclude body1="r1_base_link" body2="r1_l_ankle_roll_link" />
+    <exclude body1="r1_torso_link" body2="r1_r_hip_pitch_link" />
+    <exclude body1="r1_torso_link" body2="r1_r_hip_roll_link" />
+    <exclude body1="r1_torso_link" body2="r1_r_thigh_link" />
+    <exclude body1="r1_torso_link" body2="r1_r_calf_link" />
+    <exclude body1="r1_torso_link" body2="r1_r_ankle_pitch_link" />
+    <exclude body1="r1_torso_link" body2="r1_r_ankle_roll_link" />
+    <exclude body1="r1_torso_link" body2="r1_l_hip_pitch_link" />
+    <exclude body1="r1_torso_link" body2="r1_l_hip_roll_link" />
+    <exclude body1="r1_torso_link" body2="r1_l_thigh_link" />
+    <exclude body1="r1_torso_link" body2="r1_l_calf_link" />
+    <exclude body1="r1_torso_link" body2="r1_l_ankle_pitch_link" />
+    <exclude body1="r1_torso_link" body2="r1_l_ankle_roll_link" />
+    <exclude body1="r1_r_hip_pitch_link" body2="r1_r_hip_roll_link" />
+    <exclude body1="r1_r_hip_pitch_link" body2="r1_r_thigh_link" />
+    <exclude body1="r1_r_hip_pitch_link" body2="r1_r_calf_link" />
+    <exclude body1="r1_r_hip_pitch_link" body2="r1_r_ankle_pitch_link" />
+    <exclude body1="r1_r_hip_pitch_link" body2="r1_r_ankle_roll_link" />
+    <exclude body1="r1_r_hip_pitch_link" body2="r1_l_hip_pitch_link" />
+    <exclude body1="r1_r_hip_pitch_link" body2="r1_l_hip_roll_link" />
+    <exclude body1="r1_r_hip_pitch_link" body2="r1_l_thigh_link" />
+    <exclude body1="r1_r_hip_pitch_link" body2="r1_l_calf_link" />
+    <exclude body1="r1_r_hip_pitch_link" body2="r1_l_ankle_pitch_link" />
+    <exclude body1="r1_r_hip_pitch_link" body2="r1_l_ankle_roll_link" />
+    <exclude body1="r1_r_hip_roll_link" body2="r1_r_thigh_link" />
+    <exclude body1="r1_r_hip_roll_link" body2="r1_r_calf_link" />
+    <exclude body1="r1_r_hip_roll_link" body2="r1_r_ankle_pitch_link" />
+    <exclude body1="r1_r_hip_roll_link" body2="r1_r_ankle_roll_link" />
+    <exclude body1="r1_r_hip_roll_link" body2="r1_l_hip_pitch_link" />
+    <exclude body1="r1_r_hip_roll_link" body2="r1_l_hip_roll_link" />
+    <exclude body1="r1_r_hip_roll_link" body2="r1_l_thigh_link" />
+    <exclude body1="r1_r_hip_roll_link" body2="r1_l_calf_link" />
+    <exclude body1="r1_r_hip_roll_link" body2="r1_l_ankle_pitch_link" />
+    <exclude body1="r1_r_hip_roll_link" body2="r1_l_ankle_roll_link" />
+    <exclude body1="r1_r_thigh_link" body2="r1_r_calf_link" />
+    <exclude body1="r1_r_thigh_link" body2="r1_r_ankle_pitch_link" />
+    <exclude body1="r1_r_thigh_link" body2="r1_r_ankle_roll_link" />
+    <exclude body1="r1_r_thigh_link" body2="r1_l_hip_pitch_link" />
+    <exclude body1="r1_r_thigh_link" body2="r1_l_hip_roll_link" />
+    <exclude body1="r1_r_thigh_link" body2="r1_l_thigh_link" />
+    <exclude body1="r1_r_thigh_link" body2="r1_l_calf_link" />
+    <exclude body1="r1_r_thigh_link" body2="r1_l_ankle_pitch_link" />
+    <exclude body1="r1_r_thigh_link" body2="r1_l_ankle_roll_link" />
+    <exclude body1="r1_r_calf_link" body2="r1_r_ankle_pitch_link" />
+    <exclude body1="r1_r_calf_link" body2="r1_r_ankle_roll_link" />
+    <exclude body1="r1_r_calf_link" body2="r1_l_hip_pitch_link" />
+    <exclude body1="r1_r_calf_link" body2="r1_l_hip_roll_link" />
+    <exclude body1="r1_r_calf_link" body2="r1_l_thigh_link" />
+    <exclude body1="r1_r_calf_link" body2="r1_l_calf_link" />
+    <exclude body1="r1_r_calf_link" body2="r1_l_ankle_pitch_link" />
+    <exclude body1="r1_r_calf_link" body2="r1_l_ankle_roll_link" />
+    <exclude body1="r1_r_ankle_pitch_link" body2="r1_r_ankle_roll_link" />
+    <exclude body1="r1_r_ankle_pitch_link" body2="r1_l_hip_pitch_link" />
+    <exclude body1="r1_r_ankle_pitch_link" body2="r1_l_hip_roll_link" />
+    <exclude body1="r1_r_ankle_pitch_link" body2="r1_l_thigh_link" />
+    <exclude body1="r1_r_ankle_pitch_link" body2="r1_l_calf_link" />
+    <exclude body1="r1_r_ankle_pitch_link" body2="r1_l_ankle_pitch_link" />
+    <exclude body1="r1_r_ankle_pitch_link" body2="r1_l_ankle_roll_link" />
+    <exclude body1="r1_r_ankle_roll_link" body2="r1_l_hip_pitch_link" />
+    <exclude body1="r1_r_ankle_roll_link" body2="r1_l_hip_roll_link" />
+    <exclude body1="r1_r_ankle_roll_link" body2="r1_l_thigh_link" />
+    <exclude body1="r1_r_ankle_roll_link" body2="r1_l_calf_link" />
+    <exclude body1="r1_r_ankle_roll_link" body2="r1_l_ankle_pitch_link" />
+    <exclude body1="r1_r_ankle_roll_link" body2="r1_l_ankle_roll_link" />
+    <exclude body1="r1_l_hip_pitch_link" body2="r1_l_hip_roll_link" />
+    <exclude body1="r1_l_hip_pitch_link" body2="r1_l_thigh_link" />
+    <exclude body1="r1_l_hip_pitch_link" body2="r1_l_calf_link" />
+    <exclude body1="r1_l_hip_pitch_link" body2="r1_l_ankle_pitch_link" />
+    <exclude body1="r1_l_hip_pitch_link" body2="r1_l_ankle_roll_link" />
+    <exclude body1="r1_l_hip_roll_link" body2="r1_l_thigh_link" />
+    <exclude body1="r1_l_hip_roll_link" body2="r1_l_calf_link" />
+    <exclude body1="r1_l_hip_roll_link" body2="r1_l_ankle_pitch_link" />
+    <exclude body1="r1_l_hip_roll_link" body2="r1_l_ankle_roll_link" />
+    <exclude body1="r1_l_thigh_link" body2="r1_l_calf_link" />
+    <exclude body1="r1_l_thigh_link" body2="r1_l_ankle_pitch_link" />
+    <exclude body1="r1_l_thigh_link" body2="r1_l_ankle_roll_link" />
+    <exclude body1="r1_l_calf_link" body2="r1_l_ankle_pitch_link" />
+    <exclude body1="r1_l_calf_link" body2="r1_l_ankle_roll_link" />
+    <exclude body1="r1_l_ankle_pitch_link" body2="r1_l_ankle_roll_link" />
+    <exclude body1="r2_base_link" body2="r2_torso_link" />
+    <exclude body1="r2_base_link" body2="r2_r_hip_pitch_link" />
+    <exclude body1="r2_base_link" body2="r2_r_hip_roll_link" />
+    <exclude body1="r2_base_link" body2="r2_r_thigh_link" />
+    <exclude body1="r2_base_link" body2="r2_r_calf_link" />
+    <exclude body1="r2_base_link" body2="r2_r_ankle_pitch_link" />
+    <exclude body1="r2_base_link" body2="r2_r_ankle_roll_link" />
+    <exclude body1="r2_base_link" body2="r2_l_hip_pitch_link" />
+    <exclude body1="r2_base_link" body2="r2_l_hip_roll_link" />
+    <exclude body1="r2_base_link" body2="r2_l_thigh_link" />
+    <exclude body1="r2_base_link" body2="r2_l_calf_link" />
+    <exclude body1="r2_base_link" body2="r2_l_ankle_pitch_link" />
+    <exclude body1="r2_base_link" body2="r2_l_ankle_roll_link" />
+    <exclude body1="r2_torso_link" body2="r2_r_hip_pitch_link" />
+    <exclude body1="r2_torso_link" body2="r2_r_hip_roll_link" />
+    <exclude body1="r2_torso_link" body2="r2_r_thigh_link" />
+    <exclude body1="r2_torso_link" body2="r2_r_calf_link" />
+    <exclude body1="r2_torso_link" body2="r2_r_ankle_pitch_link" />
+    <exclude body1="r2_torso_link" body2="r2_r_ankle_roll_link" />
+    <exclude body1="r2_torso_link" body2="r2_l_hip_pitch_link" />
+    <exclude body1="r2_torso_link" body2="r2_l_hip_roll_link" />
+    <exclude body1="r2_torso_link" body2="r2_l_thigh_link" />
+    <exclude body1="r2_torso_link" body2="r2_l_calf_link" />
+    <exclude body1="r2_torso_link" body2="r2_l_ankle_pitch_link" />
+    <exclude body1="r2_torso_link" body2="r2_l_ankle_roll_link" />
+    <exclude body1="r2_r_hip_pitch_link" body2="r2_r_hip_roll_link" />
+    <exclude body1="r2_r_hip_pitch_link" body2="r2_r_thigh_link" />
+    <exclude body1="r2_r_hip_pitch_link" body2="r2_r_calf_link" />
+    <exclude body1="r2_r_hip_pitch_link" body2="r2_r_ankle_pitch_link" />
+    <exclude body1="r2_r_hip_pitch_link" body2="r2_r_ankle_roll_link" />
+    <exclude body1="r2_r_hip_pitch_link" body2="r2_l_hip_pitch_link" />
+    <exclude body1="r2_r_hip_pitch_link" body2="r2_l_hip_roll_link" />
+    <exclude body1="r2_r_hip_pitch_link" body2="r2_l_thigh_link" />
+    <exclude body1="r2_r_hip_pitch_link" body2="r2_l_calf_link" />
+    <exclude body1="r2_r_hip_pitch_link" body2="r2_l_ankle_pitch_link" />
+    <exclude body1="r2_r_hip_pitch_link" body2="r2_l_ankle_roll_link" />
+    <exclude body1="r2_r_hip_roll_link" body2="r2_r_thigh_link" />
+    <exclude body1="r2_r_hip_roll_link" body2="r2_r_calf_link" />
+    <exclude body1="r2_r_hip_roll_link" body2="r2_r_ankle_pitch_link" />
+    <exclude body1="r2_r_hip_roll_link" body2="r2_r_ankle_roll_link" />
+    <exclude body1="r2_r_hip_roll_link" body2="r2_l_hip_pitch_link" />
+    <exclude body1="r2_r_hip_roll_link" body2="r2_l_hip_roll_link" />
+    <exclude body1="r2_r_hip_roll_link" body2="r2_l_thigh_link" />
+    <exclude body1="r2_r_hip_roll_link" body2="r2_l_calf_link" />
+    <exclude body1="r2_r_hip_roll_link" body2="r2_l_ankle_pitch_link" />
+    <exclude body1="r2_r_hip_roll_link" body2="r2_l_ankle_roll_link" />
+    <exclude body1="r2_r_thigh_link" body2="r2_r_calf_link" />
+    <exclude body1="r2_r_thigh_link" body2="r2_r_ankle_pitch_link" />
+    <exclude body1="r2_r_thigh_link" body2="r2_r_ankle_roll_link" />
+    <exclude body1="r2_r_thigh_link" body2="r2_l_hip_pitch_link" />
+    <exclude body1="r2_r_thigh_link" body2="r2_l_hip_roll_link" />
+    <exclude body1="r2_r_thigh_link" body2="r2_l_thigh_link" />
+    <exclude body1="r2_r_thigh_link" body2="r2_l_calf_link" />
+    <exclude body1="r2_r_thigh_link" body2="r2_l_ankle_pitch_link" />
+    <exclude body1="r2_r_thigh_link" body2="r2_l_ankle_roll_link" />
+    <exclude body1="r2_r_calf_link" body2="r2_r_ankle_pitch_link" />
+    <exclude body1="r2_r_calf_link" body2="r2_r_ankle_roll_link" />
+    <exclude body1="r2_r_calf_link" body2="r2_l_hip_pitch_link" />
+    <exclude body1="r2_r_calf_link" body2="r2_l_hip_roll_link" />
+    <exclude body1="r2_r_calf_link" body2="r2_l_thigh_link" />
+    <exclude body1="r2_r_calf_link" body2="r2_l_calf_link" />
+    <exclude body1="r2_r_calf_link" body2="r2_l_ankle_pitch_link" />
+    <exclude body1="r2_r_calf_link" body2="r2_l_ankle_roll_link" />
+    <exclude body1="r2_r_ankle_pitch_link" body2="r2_r_ankle_roll_link" />
+    <exclude body1="r2_r_ankle_pitch_link" body2="r2_l_hip_pitch_link" />
+    <exclude body1="r2_r_ankle_pitch_link" body2="r2_l_hip_roll_link" />
+    <exclude body1="r2_r_ankle_pitch_link" body2="r2_l_thigh_link" />
+    <exclude body1="r2_r_ankle_pitch_link" body2="r2_l_calf_link" />
+    <exclude body1="r2_r_ankle_pitch_link" body2="r2_l_ankle_pitch_link" />
+    <exclude body1="r2_r_ankle_pitch_link" body2="r2_l_ankle_roll_link" />
+    <exclude body1="r2_r_ankle_roll_link" body2="r2_l_hip_pitch_link" />
+    <exclude body1="r2_r_ankle_roll_link" body2="r2_l_hip_roll_link" />
+    <exclude body1="r2_r_ankle_roll_link" body2="r2_l_thigh_link" />
+    <exclude body1="r2_r_ankle_roll_link" body2="r2_l_calf_link" />
+    <exclude body1="r2_r_ankle_roll_link" body2="r2_l_ankle_pitch_link" />
+    <exclude body1="r2_r_ankle_roll_link" body2="r2_l_ankle_roll_link" />
+    <exclude body1="r2_l_hip_pitch_link" body2="r2_l_hip_roll_link" />
+    <exclude body1="r2_l_hip_pitch_link" body2="r2_l_thigh_link" />
+    <exclude body1="r2_l_hip_pitch_link" body2="r2_l_calf_link" />
+    <exclude body1="r2_l_hip_pitch_link" body2="r2_l_ankle_pitch_link" />
+    <exclude body1="r2_l_hip_pitch_link" body2="r2_l_ankle_roll_link" />
+    <exclude body1="r2_l_hip_roll_link" body2="r2_l_thigh_link" />
+    <exclude body1="r2_l_hip_roll_link" body2="r2_l_calf_link" />
+    <exclude body1="r2_l_hip_roll_link" body2="r2_l_ankle_pitch_link" />
+    <exclude body1="r2_l_hip_roll_link" body2="r2_l_ankle_roll_link" />
+    <exclude body1="r2_l_thigh_link" body2="r2_l_calf_link" />
+    <exclude body1="r2_l_thigh_link" body2="r2_l_ankle_pitch_link" />
+    <exclude body1="r2_l_thigh_link" body2="r2_l_ankle_roll_link" />
+    <exclude body1="r2_l_calf_link" body2="r2_l_ankle_pitch_link" />
+    <exclude body1="r2_l_calf_link" body2="r2_l_ankle_roll_link" />
+    <exclude body1="r2_l_ankle_pitch_link" body2="r2_l_ankle_roll_link" />
+    <exclude body1="r3_base_link" body2="r3_torso_link" />
+    <exclude body1="r3_base_link" body2="r3_r_hip_pitch_link" />
+    <exclude body1="r3_base_link" body2="r3_r_hip_roll_link" />
+    <exclude body1="r3_base_link" body2="r3_r_thigh_link" />
+    <exclude body1="r3_base_link" body2="r3_r_calf_link" />
+    <exclude body1="r3_base_link" body2="r3_r_ankle_pitch_link" />
+    <exclude body1="r3_base_link" body2="r3_r_ankle_roll_link" />
+    <exclude body1="r3_base_link" body2="r3_l_hip_pitch_link" />
+    <exclude body1="r3_base_link" body2="r3_l_hip_roll_link" />
+    <exclude body1="r3_base_link" body2="r3_l_thigh_link" />
+    <exclude body1="r3_base_link" body2="r3_l_calf_link" />
+    <exclude body1="r3_base_link" body2="r3_l_ankle_pitch_link" />
+    <exclude body1="r3_base_link" body2="r3_l_ankle_roll_link" />
+    <exclude body1="r3_torso_link" body2="r3_r_hip_pitch_link" />
+    <exclude body1="r3_torso_link" body2="r3_r_hip_roll_link" />
+    <exclude body1="r3_torso_link" body2="r3_r_thigh_link" />
+    <exclude body1="r3_torso_link" body2="r3_r_calf_link" />
+    <exclude body1="r3_torso_link" body2="r3_r_ankle_pitch_link" />
+    <exclude body1="r3_torso_link" body2="r3_r_ankle_roll_link" />
+    <exclude body1="r3_torso_link" body2="r3_l_hip_pitch_link" />
+    <exclude body1="r3_torso_link" body2="r3_l_hip_roll_link" />
+    <exclude body1="r3_torso_link" body2="r3_l_thigh_link" />
+    <exclude body1="r3_torso_link" body2="r3_l_calf_link" />
+    <exclude body1="r3_torso_link" body2="r3_l_ankle_pitch_link" />
+    <exclude body1="r3_torso_link" body2="r3_l_ankle_roll_link" />
+    <exclude body1="r3_r_hip_pitch_link" body2="r3_r_hip_roll_link" />
+    <exclude body1="r3_r_hip_pitch_link" body2="r3_r_thigh_link" />
+    <exclude body1="r3_r_hip_pitch_link" body2="r3_r_calf_link" />
+    <exclude body1="r3_r_hip_pitch_link" body2="r3_r_ankle_pitch_link" />
+    <exclude body1="r3_r_hip_pitch_link" body2="r3_r_ankle_roll_link" />
+    <exclude body1="r3_r_hip_pitch_link" body2="r3_l_hip_pitch_link" />
+    <exclude body1="r3_r_hip_pitch_link" body2="r3_l_hip_roll_link" />
+    <exclude body1="r3_r_hip_pitch_link" body2="r3_l_thigh_link" />
+    <exclude body1="r3_r_hip_pitch_link" body2="r3_l_calf_link" />
+    <exclude body1="r3_r_hip_pitch_link" body2="r3_l_ankle_pitch_link" />
+    <exclude body1="r3_r_hip_pitch_link" body2="r3_l_ankle_roll_link" />
+    <exclude body1="r3_r_hip_roll_link" body2="r3_r_thigh_link" />
+    <exclude body1="r3_r_hip_roll_link" body2="r3_r_calf_link" />
+    <exclude body1="r3_r_hip_roll_link" body2="r3_r_ankle_pitch_link" />
+    <exclude body1="r3_r_hip_roll_link" body2="r3_r_ankle_roll_link" />
+    <exclude body1="r3_r_hip_roll_link" body2="r3_l_hip_pitch_link" />
+    <exclude body1="r3_r_hip_roll_link" body2="r3_l_hip_roll_link" />
+    <exclude body1="r3_r_hip_roll_link" body2="r3_l_thigh_link" />
+    <exclude body1="r3_r_hip_roll_link" body2="r3_l_calf_link" />
+    <exclude body1="r3_r_hip_roll_link" body2="r3_l_ankle_pitch_link" />
+    <exclude body1="r3_r_hip_roll_link" body2="r3_l_ankle_roll_link" />
+    <exclude body1="r3_r_thigh_link" body2="r3_r_calf_link" />
+    <exclude body1="r3_r_thigh_link" body2="r3_r_ankle_pitch_link" />
+    <exclude body1="r3_r_thigh_link" body2="r3_r_ankle_roll_link" />
+    <exclude body1="r3_r_thigh_link" body2="r3_l_hip_pitch_link" />
+    <exclude body1="r3_r_thigh_link" body2="r3_l_hip_roll_link" />
+    <exclude body1="r3_r_thigh_link" body2="r3_l_thigh_link" />
+    <exclude body1="r3_r_thigh_link" body2="r3_l_calf_link" />
+    <exclude body1="r3_r_thigh_link" body2="r3_l_ankle_pitch_link" />
+    <exclude body1="r3_r_thigh_link" body2="r3_l_ankle_roll_link" />
+    <exclude body1="r3_r_calf_link" body2="r3_r_ankle_pitch_link" />
+    <exclude body1="r3_r_calf_link" body2="r3_r_ankle_roll_link" />
+    <exclude body1="r3_r_calf_link" body2="r3_l_hip_pitch_link" />
+    <exclude body1="r3_r_calf_link" body2="r3_l_hip_roll_link" />
+    <exclude body1="r3_r_calf_link" body2="r3_l_thigh_link" />
+    <exclude body1="r3_r_calf_link" body2="r3_l_calf_link" />
+    <exclude body1="r3_r_calf_link" body2="r3_l_ankle_pitch_link" />
+    <exclude body1="r3_r_calf_link" body2="r3_l_ankle_roll_link" />
+    <exclude body1="r3_r_ankle_pitch_link" body2="r3_r_ankle_roll_link" />
+    <exclude body1="r3_r_ankle_pitch_link" body2="r3_l_hip_pitch_link" />
+    <exclude body1="r3_r_ankle_pitch_link" body2="r3_l_hip_roll_link" />
+    <exclude body1="r3_r_ankle_pitch_link" body2="r3_l_thigh_link" />
+    <exclude body1="r3_r_ankle_pitch_link" body2="r3_l_calf_link" />
+    <exclude body1="r3_r_ankle_pitch_link" body2="r3_l_ankle_pitch_link" />
+    <exclude body1="r3_r_ankle_pitch_link" body2="r3_l_ankle_roll_link" />
+    <exclude body1="r3_r_ankle_roll_link" body2="r3_l_hip_pitch_link" />
+    <exclude body1="r3_r_ankle_roll_link" body2="r3_l_hip_roll_link" />
+    <exclude body1="r3_r_ankle_roll_link" body2="r3_l_thigh_link" />
+    <exclude body1="r3_r_ankle_roll_link" body2="r3_l_calf_link" />
+    <exclude body1="r3_r_ankle_roll_link" body2="r3_l_ankle_pitch_link" />
+    <exclude body1="r3_r_ankle_roll_link" body2="r3_l_ankle_roll_link" />
+    <exclude body1="r3_l_hip_pitch_link" body2="r3_l_hip_roll_link" />
+    <exclude body1="r3_l_hip_pitch_link" body2="r3_l_thigh_link" />
+    <exclude body1="r3_l_hip_pitch_link" body2="r3_l_calf_link" />
+    <exclude body1="r3_l_hip_pitch_link" body2="r3_l_ankle_pitch_link" />
+    <exclude body1="r3_l_hip_pitch_link" body2="r3_l_ankle_roll_link" />
+    <exclude body1="r3_l_hip_roll_link" body2="r3_l_thigh_link" />
+    <exclude body1="r3_l_hip_roll_link" body2="r3_l_calf_link" />
+    <exclude body1="r3_l_hip_roll_link" body2="r3_l_ankle_pitch_link" />
+    <exclude body1="r3_l_hip_roll_link" body2="r3_l_ankle_roll_link" />
+    <exclude body1="r3_l_thigh_link" body2="r3_l_calf_link" />
+    <exclude body1="r3_l_thigh_link" body2="r3_l_ankle_pitch_link" />
+    <exclude body1="r3_l_thigh_link" body2="r3_l_ankle_roll_link" />
+    <exclude body1="r3_l_calf_link" body2="r3_l_ankle_pitch_link" />
+    <exclude body1="r3_l_calf_link" body2="r3_l_ankle_roll_link" />
+    <exclude body1="r3_l_ankle_pitch_link" body2="r3_l_ankle_roll_link" />
+    <exclude body1="r4_base_link" body2="r4_torso_link" />
+    <exclude body1="r4_base_link" body2="r4_r_hip_pitch_link" />
+    <exclude body1="r4_base_link" body2="r4_r_hip_roll_link" />
+    <exclude body1="r4_base_link" body2="r4_r_thigh_link" />
+    <exclude body1="r4_base_link" body2="r4_r_calf_link" />
+    <exclude body1="r4_base_link" body2="r4_r_ankle_pitch_link" />
+    <exclude body1="r4_base_link" body2="r4_r_ankle_roll_link" />
+    <exclude body1="r4_base_link" body2="r4_l_hip_pitch_link" />
+    <exclude body1="r4_base_link" body2="r4_l_hip_roll_link" />
+    <exclude body1="r4_base_link" body2="r4_l_thigh_link" />
+    <exclude body1="r4_base_link" body2="r4_l_calf_link" />
+    <exclude body1="r4_base_link" body2="r4_l_ankle_pitch_link" />
+    <exclude body1="r4_base_link" body2="r4_l_ankle_roll_link" />
+    <exclude body1="r4_torso_link" body2="r4_r_hip_pitch_link" />
+    <exclude body1="r4_torso_link" body2="r4_r_hip_roll_link" />
+    <exclude body1="r4_torso_link" body2="r4_r_thigh_link" />
+    <exclude body1="r4_torso_link" body2="r4_r_calf_link" />
+    <exclude body1="r4_torso_link" body2="r4_r_ankle_pitch_link" />
+    <exclude body1="r4_torso_link" body2="r4_r_ankle_roll_link" />
+    <exclude body1="r4_torso_link" body2="r4_l_hip_pitch_link" />
+    <exclude body1="r4_torso_link" body2="r4_l_hip_roll_link" />
+    <exclude body1="r4_torso_link" body2="r4_l_thigh_link" />
+    <exclude body1="r4_torso_link" body2="r4_l_calf_link" />
+    <exclude body1="r4_torso_link" body2="r4_l_ankle_pitch_link" />
+    <exclude body1="r4_torso_link" body2="r4_l_ankle_roll_link" />
+    <exclude body1="r4_r_hip_pitch_link" body2="r4_r_hip_roll_link" />
+    <exclude body1="r4_r_hip_pitch_link" body2="r4_r_thigh_link" />
+    <exclude body1="r4_r_hip_pitch_link" body2="r4_r_calf_link" />
+    <exclude body1="r4_r_hip_pitch_link" body2="r4_r_ankle_pitch_link" />
+    <exclude body1="r4_r_hip_pitch_link" body2="r4_r_ankle_roll_link" />
+    <exclude body1="r4_r_hip_pitch_link" body2="r4_l_hip_pitch_link" />
+    <exclude body1="r4_r_hip_pitch_link" body2="r4_l_hip_roll_link" />
+    <exclude body1="r4_r_hip_pitch_link" body2="r4_l_thigh_link" />
+    <exclude body1="r4_r_hip_pitch_link" body2="r4_l_calf_link" />
+    <exclude body1="r4_r_hip_pitch_link" body2="r4_l_ankle_pitch_link" />
+    <exclude body1="r4_r_hip_pitch_link" body2="r4_l_ankle_roll_link" />
+    <exclude body1="r4_r_hip_roll_link" body2="r4_r_thigh_link" />
+    <exclude body1="r4_r_hip_roll_link" body2="r4_r_calf_link" />
+    <exclude body1="r4_r_hip_roll_link" body2="r4_r_ankle_pitch_link" />
+    <exclude body1="r4_r_hip_roll_link" body2="r4_r_ankle_roll_link" />
+    <exclude body1="r4_r_hip_roll_link" body2="r4_l_hip_pitch_link" />
+    <exclude body1="r4_r_hip_roll_link" body2="r4_l_hip_roll_link" />
+    <exclude body1="r4_r_hip_roll_link" body2="r4_l_thigh_link" />
+    <exclude body1="r4_r_hip_roll_link" body2="r4_l_calf_link" />
+    <exclude body1="r4_r_hip_roll_link" body2="r4_l_ankle_pitch_link" />
+    <exclude body1="r4_r_hip_roll_link" body2="r4_l_ankle_roll_link" />
+    <exclude body1="r4_r_thigh_link" body2="r4_r_calf_link" />
+    <exclude body1="r4_r_thigh_link" body2="r4_r_ankle_pitch_link" />
+    <exclude body1="r4_r_thigh_link" body2="r4_r_ankle_roll_link" />
+    <exclude body1="r4_r_thigh_link" body2="r4_l_hip_pitch_link" />
+    <exclude body1="r4_r_thigh_link" body2="r4_l_hip_roll_link" />
+    <exclude body1="r4_r_thigh_link" body2="r4_l_thigh_link" />
+    <exclude body1="r4_r_thigh_link" body2="r4_l_calf_link" />
+    <exclude body1="r4_r_thigh_link" body2="r4_l_ankle_pitch_link" />
+    <exclude body1="r4_r_thigh_link" body2="r4_l_ankle_roll_link" />
+    <exclude body1="r4_r_calf_link" body2="r4_r_ankle_pitch_link" />
+    <exclude body1="r4_r_calf_link" body2="r4_r_ankle_roll_link" />
+    <exclude body1="r4_r_calf_link" body2="r4_l_hip_pitch_link" />
+    <exclude body1="r4_r_calf_link" body2="r4_l_hip_roll_link" />
+    <exclude body1="r4_r_calf_link" body2="r4_l_thigh_link" />
+    <exclude body1="r4_r_calf_link" body2="r4_l_calf_link" />
+    <exclude body1="r4_r_calf_link" body2="r4_l_ankle_pitch_link" />
+    <exclude body1="r4_r_calf_link" body2="r4_l_ankle_roll_link" />
+    <exclude body1="r4_r_ankle_pitch_link" body2="r4_r_ankle_roll_link" />
+    <exclude body1="r4_r_ankle_pitch_link" body2="r4_l_hip_pitch_link" />
+    <exclude body1="r4_r_ankle_pitch_link" body2="r4_l_hip_roll_link" />
+    <exclude body1="r4_r_ankle_pitch_link" body2="r4_l_thigh_link" />
+    <exclude body1="r4_r_ankle_pitch_link" body2="r4_l_calf_link" />
+    <exclude body1="r4_r_ankle_pitch_link" body2="r4_l_ankle_pitch_link" />
+    <exclude body1="r4_r_ankle_pitch_link" body2="r4_l_ankle_roll_link" />
+    <exclude body1="r4_r_ankle_roll_link" body2="r4_l_hip_pitch_link" />
+    <exclude body1="r4_r_ankle_roll_link" body2="r4_l_hip_roll_link" />
+    <exclude body1="r4_r_ankle_roll_link" body2="r4_l_thigh_link" />
+    <exclude body1="r4_r_ankle_roll_link" body2="r4_l_calf_link" />
+    <exclude body1="r4_r_ankle_roll_link" body2="r4_l_ankle_pitch_link" />
+    <exclude body1="r4_r_ankle_roll_link" body2="r4_l_ankle_roll_link" />
+    <exclude body1="r4_l_hip_pitch_link" body2="r4_l_hip_roll_link" />
+    <exclude body1="r4_l_hip_pitch_link" body2="r4_l_thigh_link" />
+    <exclude body1="r4_l_hip_pitch_link" body2="r4_l_calf_link" />
+    <exclude body1="r4_l_hip_pitch_link" body2="r4_l_ankle_pitch_link" />
+    <exclude body1="r4_l_hip_pitch_link" body2="r4_l_ankle_roll_link" />
+    <exclude body1="r4_l_hip_roll_link" body2="r4_l_thigh_link" />
+    <exclude body1="r4_l_hip_roll_link" body2="r4_l_calf_link" />
+    <exclude body1="r4_l_hip_roll_link" body2="r4_l_ankle_pitch_link" />
+    <exclude body1="r4_l_hip_roll_link" body2="r4_l_ankle_roll_link" />
+    <exclude body1="r4_l_thigh_link" body2="r4_l_calf_link" />
+    <exclude body1="r4_l_thigh_link" body2="r4_l_ankle_pitch_link" />
+    <exclude body1="r4_l_thigh_link" body2="r4_l_ankle_roll_link" />
+    <exclude body1="r4_l_calf_link" body2="r4_l_ankle_pitch_link" />
+    <exclude body1="r4_l_calf_link" body2="r4_l_ankle_roll_link" />
+    <exclude body1="r4_l_ankle_pitch_link" body2="r4_l_ankle_roll_link" />
+    <exclude body1="r5_base_link" body2="r5_torso_link" />
+    <exclude body1="r5_base_link" body2="r5_r_hip_pitch_link" />
+    <exclude body1="r5_base_link" body2="r5_r_hip_roll_link" />
+    <exclude body1="r5_base_link" body2="r5_r_thigh_link" />
+    <exclude body1="r5_base_link" body2="r5_r_calf_link" />
+    <exclude body1="r5_base_link" body2="r5_r_ankle_pitch_link" />
+    <exclude body1="r5_base_link" body2="r5_r_ankle_roll_link" />
+    <exclude body1="r5_base_link" body2="r5_l_hip_pitch_link" />
+    <exclude body1="r5_base_link" body2="r5_l_hip_roll_link" />
+    <exclude body1="r5_base_link" body2="r5_l_thigh_link" />
+    <exclude body1="r5_base_link" body2="r5_l_calf_link" />
+    <exclude body1="r5_base_link" body2="r5_l_ankle_pitch_link" />
+    <exclude body1="r5_base_link" body2="r5_l_ankle_roll_link" />
+    <exclude body1="r5_torso_link" body2="r5_r_hip_pitch_link" />
+    <exclude body1="r5_torso_link" body2="r5_r_hip_roll_link" />
+    <exclude body1="r5_torso_link" body2="r5_r_thigh_link" />
+    <exclude body1="r5_torso_link" body2="r5_r_calf_link" />
+    <exclude body1="r5_torso_link" body2="r5_r_ankle_pitch_link" />
+    <exclude body1="r5_torso_link" body2="r5_r_ankle_roll_link" />
+    <exclude body1="r5_torso_link" body2="r5_l_hip_pitch_link" />
+    <exclude body1="r5_torso_link" body2="r5_l_hip_roll_link" />
+    <exclude body1="r5_torso_link" body2="r5_l_thigh_link" />
+    <exclude body1="r5_torso_link" body2="r5_l_calf_link" />
+    <exclude body1="r5_torso_link" body2="r5_l_ankle_pitch_link" />
+    <exclude body1="r5_torso_link" body2="r5_l_ankle_roll_link" />
+    <exclude body1="r5_r_hip_pitch_link" body2="r5_r_hip_roll_link" />
+    <exclude body1="r5_r_hip_pitch_link" body2="r5_r_thigh_link" />
+    <exclude body1="r5_r_hip_pitch_link" body2="r5_r_calf_link" />
+    <exclude body1="r5_r_hip_pitch_link" body2="r5_r_ankle_pitch_link" />
+    <exclude body1="r5_r_hip_pitch_link" body2="r5_r_ankle_roll_link" />
+    <exclude body1="r5_r_hip_pitch_link" body2="r5_l_hip_pitch_link" />
+    <exclude body1="r5_r_hip_pitch_link" body2="r5_l_hip_roll_link" />
+    <exclude body1="r5_r_hip_pitch_link" body2="r5_l_thigh_link" />
+    <exclude body1="r5_r_hip_pitch_link" body2="r5_l_calf_link" />
+    <exclude body1="r5_r_hip_pitch_link" body2="r5_l_ankle_pitch_link" />
+    <exclude body1="r5_r_hip_pitch_link" body2="r5_l_ankle_roll_link" />
+    <exclude body1="r5_r_hip_roll_link" body2="r5_r_thigh_link" />
+    <exclude body1="r5_r_hip_roll_link" body2="r5_r_calf_link" />
+    <exclude body1="r5_r_hip_roll_link" body2="r5_r_ankle_pitch_link" />
+    <exclude body1="r5_r_hip_roll_link" body2="r5_r_ankle_roll_link" />
+    <exclude body1="r5_r_hip_roll_link" body2="r5_l_hip_pitch_link" />
+    <exclude body1="r5_r_hip_roll_link" body2="r5_l_hip_roll_link" />
+    <exclude body1="r5_r_hip_roll_link" body2="r5_l_thigh_link" />
+    <exclude body1="r5_r_hip_roll_link" body2="r5_l_calf_link" />
+    <exclude body1="r5_r_hip_roll_link" body2="r5_l_ankle_pitch_link" />
+    <exclude body1="r5_r_hip_roll_link" body2="r5_l_ankle_roll_link" />
+    <exclude body1="r5_r_thigh_link" body2="r5_r_calf_link" />
+    <exclude body1="r5_r_thigh_link" body2="r5_r_ankle_pitch_link" />
+    <exclude body1="r5_r_thigh_link" body2="r5_r_ankle_roll_link" />
+    <exclude body1="r5_r_thigh_link" body2="r5_l_hip_pitch_link" />
+    <exclude body1="r5_r_thigh_link" body2="r5_l_hip_roll_link" />
+    <exclude body1="r5_r_thigh_link" body2="r5_l_thigh_link" />
+    <exclude body1="r5_r_thigh_link" body2="r5_l_calf_link" />
+    <exclude body1="r5_r_thigh_link" body2="r5_l_ankle_pitch_link" />
+    <exclude body1="r5_r_thigh_link" body2="r5_l_ankle_roll_link" />
+    <exclude body1="r5_r_calf_link" body2="r5_r_ankle_pitch_link" />
+    <exclude body1="r5_r_calf_link" body2="r5_r_ankle_roll_link" />
+    <exclude body1="r5_r_calf_link" body2="r5_l_hip_pitch_link" />
+    <exclude body1="r5_r_calf_link" body2="r5_l_hip_roll_link" />
+    <exclude body1="r5_r_calf_link" body2="r5_l_thigh_link" />
+    <exclude body1="r5_r_calf_link" body2="r5_l_calf_link" />
+    <exclude body1="r5_r_calf_link" body2="r5_l_ankle_pitch_link" />
+    <exclude body1="r5_r_calf_link" body2="r5_l_ankle_roll_link" />
+    <exclude body1="r5_r_ankle_pitch_link" body2="r5_r_ankle_roll_link" />
+    <exclude body1="r5_r_ankle_pitch_link" body2="r5_l_hip_pitch_link" />
+    <exclude body1="r5_r_ankle_pitch_link" body2="r5_l_hip_roll_link" />
+    <exclude body1="r5_r_ankle_pitch_link" body2="r5_l_thigh_link" />
+    <exclude body1="r5_r_ankle_pitch_link" body2="r5_l_calf_link" />
+    <exclude body1="r5_r_ankle_pitch_link" body2="r5_l_ankle_pitch_link" />
+    <exclude body1="r5_r_ankle_pitch_link" body2="r5_l_ankle_roll_link" />
+    <exclude body1="r5_r_ankle_roll_link" body2="r5_l_hip_pitch_link" />
+    <exclude body1="r5_r_ankle_roll_link" body2="r5_l_hip_roll_link" />
+    <exclude body1="r5_r_ankle_roll_link" body2="r5_l_thigh_link" />
+    <exclude body1="r5_r_ankle_roll_link" body2="r5_l_calf_link" />
+    <exclude body1="r5_r_ankle_roll_link" body2="r5_l_ankle_pitch_link" />
+    <exclude body1="r5_r_ankle_roll_link" body2="r5_l_ankle_roll_link" />
+    <exclude body1="r5_l_hip_pitch_link" body2="r5_l_hip_roll_link" />
+    <exclude body1="r5_l_hip_pitch_link" body2="r5_l_thigh_link" />
+    <exclude body1="r5_l_hip_pitch_link" body2="r5_l_calf_link" />
+    <exclude body1="r5_l_hip_pitch_link" body2="r5_l_ankle_pitch_link" />
+    <exclude body1="r5_l_hip_pitch_link" body2="r5_l_ankle_roll_link" />
+    <exclude body1="r5_l_hip_roll_link" body2="r5_l_thigh_link" />
+    <exclude body1="r5_l_hip_roll_link" body2="r5_l_calf_link" />
+    <exclude body1="r5_l_hip_roll_link" body2="r5_l_ankle_pitch_link" />
+    <exclude body1="r5_l_hip_roll_link" body2="r5_l_ankle_roll_link" />
+    <exclude body1="r5_l_thigh_link" body2="r5_l_calf_link" />
+    <exclude body1="r5_l_thigh_link" body2="r5_l_ankle_pitch_link" />
+    <exclude body1="r5_l_thigh_link" body2="r5_l_ankle_roll_link" />
+    <exclude body1="r5_l_calf_link" body2="r5_l_ankle_pitch_link" />
+    <exclude body1="r5_l_calf_link" body2="r5_l_ankle_roll_link" />
+    <exclude body1="r5_l_ankle_pitch_link" body2="r5_l_ankle_roll_link" />
+  </contact>
+</mujoco>
